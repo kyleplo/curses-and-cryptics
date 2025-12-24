@@ -2,9 +2,9 @@ package com.kyleplo.curses_and_crusades.fabric;
 
 import net.fabricmc.api.ModInitializer;
 
-import com.kyleplo.curses_and_crusades.ExampleMod;
+import com.kyleplo.curses_and_crusades.CursesAndCrusades;
 
-public final class ExampleModFabric implements ModInitializer {
+public final class CursesAndCrusadesFabric implements ModInitializer {
     @Override
     public void onInitialize() {
         // This code runs as soon as Minecraft is in a mod-load-ready state.
@@ -12,6 +12,6 @@ public final class ExampleModFabric implements ModInitializer {
         // Proceed with mild caution.
 
         // Run our common setup.
-        ExampleMod.init();
+        CursesAndCrusades.init();
     }
 }
