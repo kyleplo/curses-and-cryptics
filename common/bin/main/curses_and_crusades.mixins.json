@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.kyleplo.curses_and_crusades.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
