@@ -27,7 +27,6 @@ public abstract class AnvilMenuMixin {
         for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
             Holder<Enchantment> holder = entry.getKey();
             if (holder.is(CursesAndCrusades.IMMUTABILITY_CURSE)) {
-                System.out.println("found immutability_curse, disallowing enchant");
                 anvilMenu.slots.get(2).set(ItemStack.EMPTY);
                 ci.cancel();
                 return;

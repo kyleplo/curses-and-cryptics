@@ -6,7 +6,8 @@
   "client": [
   ],
   "mixins": [
-    "AnvilMenuMixin"
+    "AnvilMenuMixin",
+    "ItemEnchantmentsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
