@@ -1,0 +1,5 @@
+Curses
+- Curse of Obscuring - hides enchantment list other than self
+- Curse of Immutability - prevents additional enchantments from being applied in an anvil
+- Curse of Miasma (armor) - increases detection range
+- Curse of Quixotism - hides durability bar

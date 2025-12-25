@@ -16,10 +16,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.kyleplo.curses_and_crusades.fabric.ExampleModFabric"
+      "com.kyleplo.curses_and_crusades.fabric.CursesAndCrusadesFabric"
     ],
     "client": [
-      "com.kyleplo.curses_and_crusades.fabric.client.ExampleModFabricClient"
+      "com.kyleplo.curses_and_crusades.fabric.client.CursesAndCrusadesFabricClient"
     ]
   },
   "mixins": [
