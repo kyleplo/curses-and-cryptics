@@ -3,3 +3,15 @@ Curses
 - Curse of Immutability - prevents additional enchantments from being applied in an anvil
 - Curse of Miasma (armor) - increases detection range
 - Curse of Quixotism - hides durability bar
+- Curse of Instability - has a chance of breaking when modified in anvil
+- Curse of Impermanence - has a chance to be deleted when put in container
+
+Smithing
+- Transmogrification Smithing Template - changes texture/model to different item
+- Glinting Smithing Template - overrides enchantment glint (possibly colors?)
+- Veiling Smithing Template - hides armor model
+
+Grindstone
+- Whetstone - makes grindstone remove a singular random enchantment
+- Blessed Whetstone - makes grindstone remove a singular random enchantment, could include curses
+- Enchanted Blessed Whetstone - makes grindstone remove all curses and no other enchantments

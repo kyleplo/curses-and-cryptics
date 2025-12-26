@@ -18,6 +18,8 @@ public final class CursesAndCrusades {
             ResourceLocation.fromNamespaceAndPath(MOD_ID, "immutability_curse"));
     public static final ResourceKey<Enchantment> OBSCURING_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
             ResourceLocation.fromNamespaceAndPath(MOD_ID, "obscuring_curse"));
+    public static final ResourceKey<Enchantment> QUIXOTISM_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
+            ResourceLocation.fromNamespaceAndPath(MOD_ID, "quixotism_curse"));
 
     //public static final Supplier<DataComponentType<Unit>> PREVENT_ANVIL_ENCHANTING = regEnchComponent(
     //        "prevent_anvil_enchanting", builder -> builder.persistent(Unit.CODEC));

@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import com.kyleplo.curses_and_crusades.CursesAndCrusades;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.network.chat.Component;
@@ -43,7 +44,7 @@ public abstract class ItemEnchantmentsMixin {
 
         if (hasObscuring) {
             for (int i = 0; i < hidden; i++) {
-                consumer.accept(Component.translatable("enchantment.curses_and_crusades.obscuring_hidden"));
+                consumer.accept(Component.translatable("enchantment.curses_and_crusades.obscuring_hidden").withStyle(ChatFormatting.DARK_GRAY));
             }
             ci.cancel();
             return;
