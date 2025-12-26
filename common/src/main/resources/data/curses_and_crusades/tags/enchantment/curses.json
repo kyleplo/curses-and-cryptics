@@ -2,6 +2,7 @@
     "values": [
         "curses_and_crusades:immutability_curse",
         "curses_and_crusades:obscuring_curse",
-        "curses_and_crusades:quixotism_curse"
+        "curses_and_crusades:quixotism_curse",
+        "curses_and_crusades:instability_curse"
     ]
 }

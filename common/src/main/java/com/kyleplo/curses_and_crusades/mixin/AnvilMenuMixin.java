@@ -10,6 +10,9 @@ import com.kyleplo.curses_and_crusades.CursesAndCrusades;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -27,10 +30,37 @@ public abstract class AnvilMenuMixin {
         for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
             Holder<Enchantment> holder = entry.getKey();
             if (holder.is(CursesAndCrusades.IMMUTABILITY_CURSE)) {
-                anvilMenu.slots.get(2).set(ItemStack.EMPTY);
+                anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(ItemStack.EMPTY);
                 ci.cancel();
                 return;
             }
+        }
+    }
+
+    @Inject(method = "onTake", at = @At(value = "HEAD"), cancellable = true)
+    private void onTake(Player player, ItemStack itemStack, CallbackInfo ci) {
+        AnvilMenu anvilMenu = AnvilMenu.class.cast(this);
+        ItemEnchantments itemEnchantments = itemStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
+
+        boolean hasInstability = false;
+        int enchants = 0;
+
+        for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
+            Holder<Enchantment> holder = entry.getKey();
+            if (holder.is(CursesAndCrusades.INSTABILITY_CURSE)) {
+                hasInstability = true;
+            } else {
+                enchants++;
+            }
+        }
+
+        if (hasInstability && player.getRandom().nextFloat() < ((float) enchants / (4.0 + (float) enchants)) && !itemStack.has(DataComponents.UNBREAKABLE)) {
+            itemStack.setCount(0);
+            anvilMenu.slots.get(AnvilMenu.INPUT_SLOT).set(ItemStack.EMPTY);
+            anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(ItemStack.EMPTY);
+            player.level().playLocalSound(player, SoundEvents.ITEM_BREAK.value(), SoundSource.PLAYERS, 0.8f, 1f);
+            ci.cancel();
+            return;
         }
     }
 }

@@ -20,24 +20,31 @@ public final class CursesAndCrusades {
             ResourceLocation.fromNamespaceAndPath(MOD_ID, "obscuring_curse"));
     public static final ResourceKey<Enchantment> QUIXOTISM_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
             ResourceLocation.fromNamespaceAndPath(MOD_ID, "quixotism_curse"));
+    public static final ResourceKey<Enchantment> INSTABILITY_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
+            ResourceLocation.fromNamespaceAndPath(MOD_ID, "instability_curse"));
 
-    //public static final Supplier<DataComponentType<Unit>> PREVENT_ANVIL_ENCHANTING = regEnchComponent(
-    //        "prevent_anvil_enchanting", builder -> builder.persistent(Unit.CODEC));
+    // public static final Supplier<DataComponentType<Unit>>
+    // PREVENT_ANVIL_ENCHANTING = regEnchComponent(
+    // "prevent_anvil_enchanting", builder -> builder.persistent(Unit.CODEC));
 
     public static void init() {
         // Write common init code here.
     }
 
-    // public static <R, T extends R> Supplier<T> register(String name, Supplier<T> supplier, Registry<R> reg) {
-    //     T object = supplier.get();
-    //     Registry.register(reg, ResourceLocation.fromNamespaceAndPath(MOD_ID, name), object);
-    //     return () -> object;
+    // public static <R, T extends R> Supplier<T> register(String name, Supplier<T>
+    // supplier, Registry<R> reg) {
+    // T object = supplier.get();
+    // Registry.register(reg, ResourceLocation.fromNamespaceAndPath(MOD_ID, name),
+    // object);
+    // return () -> object;
     // }
 
-    // public static <A> Supplier<DataComponentType<A>> regEnchComponent(String name,
-    //         Consumer<DataComponentType.Builder<A>> stuff) {
-    //     DataComponentType.Builder<A> builder = DataComponentType.builder();
-    //     stuff.accept(builder);
-    //     return register(name, builder::build, BuiltInRegistries.ENCHANTMENT_EFFECT_COMPONENT_TYPE);
+    // public static <A> Supplier<DataComponentType<A>> regEnchComponent(String
+    // name,
+    // Consumer<DataComponentType.Builder<A>> stuff) {
+    // DataComponentType.Builder<A> builder = DataComponentType.builder();
+    // stuff.accept(builder);
+    // return register(name, builder::build,
+    // BuiltInRegistries.ENCHANTMENT_EFFECT_COMPONENT_TYPE);
     // }
 }
