@@ -1,0 +1,34 @@
+{
+  "anvil_cost": 8,
+  "description": {
+    "translate": "enchantment.curses_and_crusades.miasma_curse"
+  },
+  "effects": {
+    "minecraft:attributes": [
+      {
+        "amount": {
+          "type": "minecraft:linear",
+          "base": 2.5,
+          "per_level_above_first": 1
+        },
+        "attribute": "curses_and_crusades:detectable_range",
+        "id": "curses_and_crusades:enchantment.miasma_curse",
+        "operation": "add_value"
+      }
+    ]
+  },
+  "max_cost": {
+    "base": 50,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 25,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "any"
+  ],
+  "supported_items": "#minecraft:enchantable/durability",
+  "weight": 1
+}

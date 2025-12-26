@@ -8,7 +8,9 @@
   "mixins": [
     "AnvilMenuMixin",
     "ItemEnchantmentsMixin",
-    "ItemStackMixin"
+    "ItemStackMixin",
+    "TargetingConditionsMixin",
+    "LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

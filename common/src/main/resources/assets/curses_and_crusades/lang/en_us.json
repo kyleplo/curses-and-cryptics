@@ -3,5 +3,8 @@
     "enchantment.curses_and_crusades.obscuring_curse": "Curse of Obscuring",
     "enchantment.curses_and_crusades.obscuring_hidden": "...",
     "enchantment.curses_and_crusades.quixotism_curse": "Curse of Quixotism",
-    "enchantment.curses_and_crusades.instability_curse": "Curse of Instability"
+    "enchantment.curses_and_crusades.instability_curse": "Curse of Instability",
+    "enchantment.curses_and_crusades.miasma_curse": "Curse of Miasma",
+
+    "attribute.name.detectable_range": "Detectable Range"
 }
