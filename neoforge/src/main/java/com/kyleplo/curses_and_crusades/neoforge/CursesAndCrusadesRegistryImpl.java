@@ -1,0 +1,38 @@
+package com.kyleplo.curses_and_crusades.neoforge;
+
+import java.util.function.UnaryOperator;
+
+import com.kyleplo.curses_and_crusades.CursesAndCrusades;
+
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+public class CursesAndCrusadesRegistryImpl {
+    @SuppressWarnings("null")
+    public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, CursesAndCrusades.MOD_ID);
+    @SuppressWarnings("null")
+    public static final DeferredRegister.DataComponents DATA_COMPONENT_TYPES = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, CursesAndCrusades.MOD_ID);
+    @SuppressWarnings("null")
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, CursesAndCrusades.MOD_ID);
+    
+    public static Holder<Attribute> registerAttribute(String name, Attribute attribute) {
+        return ATTRIBUTES.register(name, () -> attribute);
+    }
+
+    public static <T> Holder<DataComponentType<?>> registerDataComponentType(String name,
+            UnaryOperator<DataComponentType.Builder<T>> builderOp) {
+        return DATA_COMPONENT_TYPES.registerComponentType(name, builderOp).getDelegate();
+    }
+
+    @SuppressWarnings("null")
+    public static Holder<SoundEvent> registerSoundEvent(String name) {
+        return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(
+                                ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID,
+                                        name)));
+    }
+}

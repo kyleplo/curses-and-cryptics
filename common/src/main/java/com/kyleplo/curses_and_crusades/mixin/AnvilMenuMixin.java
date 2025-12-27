@@ -5,7 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.kyleplo.curses_and_crusades.CursesAndCrusades;
+import com.kyleplo.curses_and_crusades.CursesAndCrusadesRegistry;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
@@ -43,7 +43,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
             ItemEnchantments itemEnchantments = stack1.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
             for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
                 Holder<Enchantment> holder = entry.getKey();
-                if (holder.is(CursesAndCrusades.IMMUTABILITY_CURSE)) {
+                if (holder.is(CursesAndCrusadesRegistry.IMMUTABILITY_CURSE)) {
                     anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(ItemStack.EMPTY);
                     return;
                 }
@@ -58,7 +58,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
                 }
                 BlockState blockState = level.getBlockState(blockPos);
                 ItemStack resultItemStack = anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).getItem();
-                resultItemStack.set(CursesAndCrusades.POST_ANVIL_PROCESSING, blockState.is(Blocks.DAMAGED_ANVIL) ? 2
+                resultItemStack.set(CursesAndCrusadesRegistry.POST_ANVIL_PROCESSING.value(), blockState.is(Blocks.DAMAGED_ANVIL) ? 2
                         : (blockState.is(Blocks.CHIPPED_ANVIL) ? 1 : 0));
         });
     }
@@ -79,7 +79,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
             Inventory inv = player.getInventory();
             int slot = -1;
             for (int i = 0; i < inv.getContainerSize(); i++) {
-                if (inv.getItem(i).has(CursesAndCrusades.POST_ANVIL_PROCESSING)) {
+                if (inv.getItem(i).has(CursesAndCrusadesRegistry.POST_ANVIL_PROCESSING.value())) {
                     slot = i;
                     break;
                 }
@@ -97,7 +97,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
 
         for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
             Holder<Enchantment> holder = entry.getKey();
-            if (holder.is(CursesAndCrusades.INSTABILITY_CURSE)) {
+            if (holder.is(CursesAndCrusadesRegistry.INSTABILITY_CURSE)) {
                 hasInstability = true;
             } else {
                 enchants++;
@@ -115,7 +115,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
         }
 
         if (takenItemStack.isEnchanted()) {
-            int anvilDamage = takenItemStack.get(CursesAndCrusades.POST_ANVIL_PROCESSING);
+            int anvilDamage = takenItemStack.get(CursesAndCrusadesRegistry.POST_ANVIL_PROCESSING.value());
             this.access.execute((level, blockPos) -> {
                 int enchantsNeededForCurse = 2 - anvilDamage;
                 double curseMultiplier = anvilDamage == 2 ? 0.1
@@ -129,12 +129,12 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
                     if (possibleCurses.size() > 0) {
                         takenItemStack.enchant(possibleCurses.getFirst().enchantment(), possibleCurses.getFirst().level());
                         level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(),
-                                 CursesAndCrusades.ANVIL_APPLY_CURSE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                 CursesAndCrusadesRegistry.ANVIL_APPLY_CURSE, SoundSource.BLOCKS, 1.0F, 1.0F);
                     }
                 }
             });
         }
 
-        takenItemStack.remove(CursesAndCrusades.POST_ANVIL_PROCESSING);
+        takenItemStack.remove(CursesAndCrusadesRegistry.POST_ANVIL_PROCESSING.value());
     }
 }

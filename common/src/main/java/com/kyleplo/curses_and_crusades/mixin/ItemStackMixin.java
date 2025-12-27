@@ -8,11 +8,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.kyleplo.curses_and_crusades.CursesAndCrusades;
+import com.kyleplo.curses_and_crusades.CursesAndCrusadesRegistry;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -36,7 +37,7 @@ public abstract class ItemStackMixin {
 
         for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
             Holder<Enchantment> holder = entry.getKey();
-            if (holder.is(CursesAndCrusades.QUIXOTISM_CURSE)) {
+            if (holder.is(CursesAndCrusadesRegistry.QUIXOTISM_CURSE)) {
                 ci.setReturnValue(Item.MAX_BAR_WIDTH);
                 return;
             }
@@ -53,8 +54,8 @@ public abstract class ItemStackMixin {
 
         for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
             Holder<Enchantment> holder = entry.getKey();
-            if (holder.is(CursesAndCrusades.QUIXOTISM_CURSE)) {
-                ci.setReturnValue(16733525);
+            if (holder.is(CursesAndCrusadesRegistry.QUIXOTISM_CURSE)) {
+                ci.setReturnValue(ChatFormatting.RED.getColor());
                 return;
             }
         }
@@ -70,7 +71,7 @@ public abstract class ItemStackMixin {
 
         for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
             Holder<Enchantment> holder = entry.getKey();
-            if (holder.is(CursesAndCrusades.QUIXOTISM_CURSE)) {
+            if (holder.is(CursesAndCrusadesRegistry.QUIXOTISM_CURSE)) {
                 ci.setReturnValue(true);
                 return;
             }
@@ -86,11 +87,11 @@ public abstract class ItemStackMixin {
 
             for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
                 Holder<Enchantment> holder = entry.getKey();
-                if (holder.is(CursesAndCrusades.QUIXOTISM_CURSE)) {
+                if (holder.is(CursesAndCrusadesRegistry.QUIXOTISM_CURSE)) {
                     tooltipDisplay = tooltipDisplay.withHidden(DataComponents.DAMAGE, true);
                 }
 
-                if (holder.is(CursesAndCrusades.OBSCURING_CURSE)) {
+                if (holder.is(CursesAndCrusadesRegistry.OBSCURING_CURSE)) {
                     tooltipDisplay = tooltipDisplay.withHidden(DataComponents.ATTRIBUTE_MODIFIERS, true);
                 }
             }
@@ -109,7 +110,7 @@ public abstract class ItemStackMixin {
 
             for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
                 Holder<Enchantment> holder = entry.getKey();
-                if (holder.is(CursesAndCrusades.IMMUTABILITY_CURSE)) {
+                if (holder.is(CursesAndCrusadesRegistry.IMMUTABILITY_CURSE)) {
                     return false;
                 }
             }

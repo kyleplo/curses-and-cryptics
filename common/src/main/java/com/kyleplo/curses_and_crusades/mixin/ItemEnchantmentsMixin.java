@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.kyleplo.curses_and_crusades.CursesAndCrusades;
+import com.kyleplo.curses_and_crusades.CursesAndCrusadesRegistry;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.ChatFormatting;
@@ -33,7 +33,7 @@ public abstract class ItemEnchantmentsMixin {
         while (iterator.hasNext()) {
             Object2IntMap.Entry<Holder<Enchantment>> enchant = iterator.next();
             if (enchant.getIntValue() > 0) {
-                if (enchant.getKey().is(CursesAndCrusades.OBSCURING_CURSE)) {
+                if (enchant.getKey().is(CursesAndCrusadesRegistry.OBSCURING_CURSE)) {
                     consumer.accept(Enchantment.getFullname(enchant.getKey(), enchant.getIntValue()));
                     hasObscuring = true;
                 } else {
