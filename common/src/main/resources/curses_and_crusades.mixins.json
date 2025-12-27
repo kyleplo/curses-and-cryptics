@@ -10,7 +10,9 @@
     "ItemEnchantmentsMixin",
     "ItemStackMixin",
     "TargetingConditionsMixin",
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "ItemCombinerMenuMixin",
+    "AnvilBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

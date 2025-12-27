@@ -6,5 +6,7 @@
     "enchantment.curses_and_crusades.instability_curse": "Curse of Instability",
     "enchantment.curses_and_crusades.miasma_curse": "Curse of Miasma",
 
-    "attribute.name.detectable_range": "Detectable Range"
+    "attribute.name.detectable_range": "Detectable Range",
+
+    "subtitles.block.anvil.apply_curse": "Anvil applies curse"
 }

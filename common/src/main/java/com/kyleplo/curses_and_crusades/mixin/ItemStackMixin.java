@@ -98,4 +98,23 @@ public abstract class ItemStackMixin {
 
         original.call(tooltipContext, tooltipDisplay, player, tooltipFlag, consumer);
     }
+
+    @WrapMethod(method = "isEnchantable")
+    public boolean isEnchantable(Operation<Boolean> original) {
+        boolean originalValue = original.call();
+        ItemStack itemStack = ItemStack.class.cast(this);
+
+        if (itemStack.isEnchanted() && originalValue) {
+            ItemEnchantments itemEnchantments = itemStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
+
+            for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
+                Holder<Enchantment> holder = entry.getKey();
+                if (holder.is(CursesAndCrusades.IMMUTABILITY_CURSE)) {
+                    return false;
+                }
+            }
+        }
+
+        return originalValue;
+    }
 }

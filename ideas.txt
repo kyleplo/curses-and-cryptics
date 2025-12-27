@@ -1,17 +1,19 @@
 Curses
-- Curse of Obscuring - hides enchantment list other than self
-- Curse of Immutability - prevents additional enchantments from being applied in an anvil
-- Curse of Miasma (armor) - increases detection range
-- Curse of Quixotism - hides durability bar
-- Curse of Instability - has a chance of breaking when modified in anvil
-- Curse of Impermanence - has a chance to be deleted when put in container
+- Curse of Obscuring - hides attributes and enchantment list other than self - done
+- Curse of Immutability - prevents additional enchantments from being applied in an anvil - done
+- Curse of Miasma - increases detection range - done
+- Curse of Quixotism - hides durability - done
+- Curse of Instability - has a chance of breaking when modified in anvil - done
+
+Grindstone
+- Whetstone - makes grindstone remove a singular random enchantment
+- Blessed Whetstone - makes grindstone remove a singular random enchantment, could include curses
+- Enchanted Blessed Whetstone - makes grindstone remove all curses and no other enchantments
 
 Smithing
 - Transmogrification Smithing Template - changes texture/model to different item
 - Glinting Smithing Template - overrides enchantment glint (possibly colors?)
 - Veiling Smithing Template - hides armor model
 
-Grindstone
-- Whetstone - makes grindstone remove a singular random enchantment
-- Blessed Whetstone - makes grindstone remove a singular random enchantment, could include curses
-- Enchanted Blessed Whetstone - makes grindstone remove all curses and no other enchantments
+- Some other mechanic for the Detection Range attribute
+- Curses on villager traded items or maybe from anvil

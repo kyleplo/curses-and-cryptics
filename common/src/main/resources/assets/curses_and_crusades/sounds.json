@@ -1,0 +1,8 @@
+{
+    "block.anvil.apply_curse": {
+        "sounds": [
+            "block/beacon/deactivate"
+        ],
+        "subtitle": "subtitles.block.anvil.apply_curse"
+    }
+}
