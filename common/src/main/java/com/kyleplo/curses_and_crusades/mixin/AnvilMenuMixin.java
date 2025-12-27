@@ -109,7 +109,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
             takenItemStack.setCount(0);
             anvilMenu.slots.get(AnvilMenu.INPUT_SLOT).set(ItemStack.EMPTY);
             anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(ItemStack.EMPTY);
-            player.level().playLocalSound(null, SoundEvents.ITEM_BREAK.value(), SoundSource.PLAYERS, 0.8f, 1f);
+            player.level().playSound(null, player.blockPosition(), SoundEvents.ITEM_BREAK.value(), SoundSource.PLAYERS, 0.8f, 1f);
             ci.cancel();
             return;
         }
@@ -120,7 +120,6 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
                 int enchantsNeededForCurse = 2 - anvilDamage;
                 double curseMultiplier = anvilDamage == 2 ? 0.1
                         : (anvilDamage == 1 ? 0.5 : 0.02);
-                System.out.println(itemEnchantments.size() * curseMultiplier);
                 if (itemEnchantments.size() > enchantsNeededForCurse
                         && player.getRandom().nextFloat() < (itemEnchantments.size() - enchantsNeededForCurse) * curseMultiplier) {
                     Stream<Holder<Enchantment>> curses = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT)

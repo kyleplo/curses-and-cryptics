@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:damaged_anvil",
+    "#curses_and_crusades:anvil_repair"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minecraft:chipped_anvil"
+  }
+}
