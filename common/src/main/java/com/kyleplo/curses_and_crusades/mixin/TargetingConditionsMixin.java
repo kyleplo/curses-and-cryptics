@@ -2,11 +2,11 @@ package com.kyleplo.curses_and_crusades.mixin;
 
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.Shadow;
 
 import com.kyleplo.curses_and_crusades.CursesAndCrusadesRegistry;
-
-import org.spongepowered.asm.mixin.injection.At;
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
@@ -14,12 +14,30 @@ import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 
 @Mixin(TargetingConditions.class)
 public abstract class TargetingConditionsMixin {
-    @Redirect(method = "test", at = @At(value = "INVOKE", target = "Ljava/lang/Math;max(DD)D"))
-    public double testRange(double range, double min, ServerLevel serverLevel, @Nullable LivingEntity attacker, LivingEntity potentialTarget) {
-        double modifiedRange = range;
+    @Shadow
+    private double range;
+
+    @Shadow
+    private boolean checkLineOfSight;
+
+    @WrapMethod(method = "test")
+    public boolean test(ServerLevel serverLevel, @Nullable LivingEntity attacker, LivingEntity potentialTarget, Operation<Boolean> original) {
+        double originalRange = this.range;
+        boolean originalLineOfSight = this.checkLineOfSight;
+
         if (potentialTarget.getAttributes().hasAttribute(CursesAndCrusadesRegistry.DETECTABLE_RANGE)) {
-            modifiedRange += potentialTarget.getAttributeValue(CursesAndCrusadesRegistry.DETECTABLE_RANGE);
+            double attrVal = potentialTarget.getAttributeValue(CursesAndCrusadesRegistry.DETECTABLE_RANGE);
+            this.range += attrVal;
+            if (attrVal > 0) {
+                this.checkLineOfSight = false;
+            }
         }
-        return Math.max(modifiedRange, min);
+
+        boolean value = original.call(serverLevel, attacker, potentialTarget);
+
+        this.range = originalRange;
+        this.checkLineOfSight = originalLineOfSight;
+
+        return value;
     }
 }
