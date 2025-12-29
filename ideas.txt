@@ -16,4 +16,4 @@ Smithing
 - Veiling Smithing Template - hides armor model
 
 - Some other mechanic for the Detection Range attribute
-- Curses on villager traded items or maybe from anvil
+- Curses from anvil - chance increases with anvil damage and number of enchantments - done

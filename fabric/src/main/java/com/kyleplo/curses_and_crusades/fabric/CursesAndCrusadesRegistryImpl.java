@@ -1,5 +1,8 @@
 package com.kyleplo.curses_and_crusades.fabric;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 import com.kyleplo.curses_and_crusades.CursesAndCrusades;
@@ -8,11 +11,16 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.item.Item;
 
 public class CursesAndCrusadesRegistryImpl {
+    public static final List<Item> itemsForCreativeTab = new ArrayList<>();
+
     public static Holder<Attribute> registerAttribute(String name, Attribute attribute) {
         return Registry.registerForHolder(BuiltInRegistries.ATTRIBUTE,
                 ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, name),
@@ -33,5 +41,12 @@ public class CursesAndCrusadesRegistryImpl {
                         SoundEvent.createVariableRangeEvent(
                                 ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID,
                                         name))));
+    }
+
+    public static Holder<Item> registerItem(String name, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
+        Item item = itemFactory.apply(settings.setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, name))));
+        itemsForCreativeTab.add(item);
+        return Holder.direct(Registry.register(BuiltInRegistries.ITEM,
+                ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, name), item));
     }
 }
