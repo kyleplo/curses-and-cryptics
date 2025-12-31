@@ -8,7 +8,7 @@
       {
         "amount": {
           "type": "minecraft:linear",
-          "base": 2.5,
+          "base": 4,
           "per_level_above_first": 1
         },
         "attribute": "curses_and_crusades:detectable_range",
@@ -27,8 +27,8 @@
     "per_level_above_first": 0
   },
   "slots": [
-    "any"
+    "armor"
   ],
-  "supported_items": "#minecraft:enchantable/durability",
+  "supported_items": "#minecraft:enchantable/equippable",
   "weight": 1
 }

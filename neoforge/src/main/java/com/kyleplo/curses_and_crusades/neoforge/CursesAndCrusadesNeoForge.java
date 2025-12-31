@@ -35,7 +35,6 @@ public final class CursesAndCrusadesNeoForge {
     }
 
     private static void onGrindstoneTake (GrindstoneEvent.OnTakeItem event) {
-        System.out.println("onGrindstoneTake event");
         if (event.getTopItem().is(CursesAndCrusadesRegistry.WHETSTONES)) {
             ItemStack top = event.getTopItem().copy();
             top.shrink(1);

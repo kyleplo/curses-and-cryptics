@@ -5,6 +5,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import com.kyleplo.curses_and_crusades.CursesAndCrusades;
 import com.kyleplo.curses_and_crusades.CursesAndCrusadesRegistry;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -114,12 +115,12 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
             return;
         }
 
-        if (takenItemStack.isEnchanted()) {
+        if (takenItemStack.isEnchanted() && CursesAndCrusades.config.anvilCurses) {
             int anvilDamage = takenItemStack.get(CursesAndCrusadesRegistry.POST_ANVIL_PROCESSING.value());
             this.access.execute((level, blockPos) -> {
                 int enchantsNeededForCurse = 2 - anvilDamage;
-                double curseMultiplier = anvilDamage == 2 ? 0.1
-                        : (anvilDamage == 1 ? 0.5 : 0.02);
+                double curseMultiplier = anvilDamage == 2 ? CursesAndCrusades.config.damagedAnvilCurseChance
+                        : (anvilDamage == 1 ? CursesAndCrusades.config.chippedAnvilCurseChance : CursesAndCrusades.config.defaultAnvilCurseChance);
                 if (itemEnchantments.size() > enchantsNeededForCurse
                         && player.getRandom().nextFloat() < (itemEnchantments.size() - enchantsNeededForCurse) * curseMultiplier) {
                     Stream<Holder<Enchantment>> curses = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT)
