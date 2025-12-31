@@ -46,7 +46,7 @@ public class CursesAndCrusadesRegistryImpl {
     public static Holder<Item> registerItem(String name, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
         Item item = itemFactory.apply(settings.setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, name))));
         itemsForCreativeTab.add(item);
-        return Holder.direct(Registry.register(BuiltInRegistries.ITEM,
-                ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, name), item));
+        return Registry.registerForHolder(BuiltInRegistries.ITEM,
+                ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, name), item);
     }
 }

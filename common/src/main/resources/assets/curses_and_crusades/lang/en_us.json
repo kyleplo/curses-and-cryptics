@@ -20,6 +20,8 @@
     "item.curses_and_crusades.blessed_whetstone": "Blessed Whetstone",
     "item.curses_and_crusades.enchanted_blessed_whetstone": "Enchanted Blessed Whetstone",
 
+    "container.grindstone.whetstone_take_item_hint": "Take item to apply Whetstone",
+
     "tag.item.curses_and_crusades.anvil_repair": "Anvil Repair Ingredients",
     "tag.item.curses_and_crusades.whetstones": "Whetstones"
 }

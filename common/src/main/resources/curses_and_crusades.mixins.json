@@ -12,7 +12,10 @@
     "TargetingConditionsMixin",
     "LivingEntityMixin",
     "ItemCombinerMenuMixin",
-    "AnvilBlockMixin"
+    "AnvilBlockMixin",
+    "GrindstoneMenuMixin",
+    "GrindstoneMenuInputSlotMixin",
+    "GrindstoneMenuOutputSlotMixin"
   ],
   "injectors": {
     "defaultRequire": 1

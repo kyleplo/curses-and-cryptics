@@ -21,6 +21,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
@@ -97,7 +98,20 @@ public abstract class ItemStackMixin {
             }
         }
 
+        ItemLore itemLore = itemStack.getOrDefault(DataComponents.LORE, ItemLore.EMPTY);
+
+        if (itemStack.has(CursesAndCrusadesRegistry.POST_GRINDSTONE_PROCESSING.value())) {
+            tooltipDisplay = tooltipDisplay.withHidden(DataComponents.ATTRIBUTE_MODIFIERS, true).withHidden(DataComponents.ENCHANTMENTS, true).withHidden(DataComponents.STORED_ENCHANTMENTS, true);
+            itemStack.set(DataComponents.LORE, itemLore.withLineAdded(Component.translatable("container.grindstone.whetstone_take_item_hint").withStyle(ChatFormatting.RESET).withStyle(ChatFormatting.GRAY)));
+        }
+
         original.call(tooltipContext, tooltipDisplay, player, tooltipFlag, consumer);
+
+        if (itemLore.lines().size() > 0) {
+            itemStack.set(DataComponents.LORE, itemLore);
+        } else {
+            itemStack.remove(DataComponents.LORE);
+        }
     }
 
     @WrapMethod(method = "isEnchantable")
