@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.curses_and_crusades.obscuring_curse"
+    "translate": "enchantment.curses_and_cryptics.obscuring_curse"
   },
   "effects": {},
   "max_cost": {

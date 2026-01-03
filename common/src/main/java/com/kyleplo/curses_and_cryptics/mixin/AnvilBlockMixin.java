@@ -1,11 +1,11 @@
-package com.kyleplo.curses_and_crusades.mixin;
+package com.kyleplo.curses_and_cryptics.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.kyleplo.curses_and_crusades.CursesAndCrusades;
+import com.kyleplo.curses_and_cryptics.CursesAndCryptics;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,7 +25,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 @Mixin(AnvilBlock.class)
 public class AnvilBlockMixin {
-    TagKey<Item> ANVIL_REPAIR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, "anvil_repair"));
+    TagKey<Item> ANVIL_REPAIR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "anvil_repair"));
 
     @Inject(method = "useWithoutItem", at = @At(value = "HEAD"), cancellable = true)
     protected void useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult, CallbackInfoReturnable<InteractionResult> ci) {

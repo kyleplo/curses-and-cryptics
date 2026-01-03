@@ -1,4 +1,4 @@
-package com.kyleplo.curses_and_crusades.mixin;
+package com.kyleplo.curses_and_cryptics.mixin;
 
 import java.util.Iterator;
 import java.util.function.Consumer;
@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import com.kyleplo.curses_and_crusades.CursesAndCrusadesRegistry;
+import com.kyleplo.curses_and_cryptics.CursesAndCrypticsRegistry;
 
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.ChatFormatting;
@@ -33,7 +33,7 @@ public abstract class ItemEnchantmentsMixin {
         while (iterator.hasNext()) {
             Object2IntMap.Entry<Holder<Enchantment>> enchant = iterator.next();
             if (enchant.getIntValue() > 0) {
-                if (enchant.getKey().is(CursesAndCrusadesRegistry.OBSCURING_CURSE)) {
+                if (enchant.getKey().is(CursesAndCrypticsRegistry.OBSCURING_CURSE)) {
                     consumer.accept(Enchantment.getFullname(enchant.getKey(), enchant.getIntValue()));
                     hasObscuring = true;
                 } else {
@@ -44,7 +44,7 @@ public abstract class ItemEnchantmentsMixin {
 
         if (hasObscuring) {
             for (int i = 0; i < hidden; i++) {
-                consumer.accept(Component.translatable("enchantment.curses_and_crusades.obscuring_hidden").withStyle(ChatFormatting.DARK_GRAY));
+                consumer.accept(Component.translatable("enchantment.curses_and_cryptics.obscuring_hidden").withStyle(ChatFormatting.DARK_GRAY));
             }
             ci.cancel();
             return;

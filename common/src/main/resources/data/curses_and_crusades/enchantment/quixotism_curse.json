@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.curses_and_crusades.quixotism_curse"
+    "translate": "enchantment.curses_and_cryptics.quixotism_curse"
   },
   "effects": {},
   "max_cost": {

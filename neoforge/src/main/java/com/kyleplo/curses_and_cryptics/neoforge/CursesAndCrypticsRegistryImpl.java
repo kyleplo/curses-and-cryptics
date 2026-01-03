@@ -1,11 +1,11 @@
-package com.kyleplo.curses_and_crusades.neoforge;
+package com.kyleplo.curses_and_cryptics.neoforge;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
-import com.kyleplo.curses_and_crusades.CursesAndCrusades;
+import com.kyleplo.curses_and_cryptics.CursesAndCryptics;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
@@ -17,11 +17,11 @@ import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class CursesAndCrusadesRegistryImpl {
-    public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, CursesAndCrusades.MOD_ID);
-    public static final DeferredRegister.DataComponents DATA_COMPONENT_TYPES = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, CursesAndCrusades.MOD_ID);
-    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, CursesAndCrusades.MOD_ID);
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CursesAndCrusades.MOD_ID);
+public class CursesAndCrypticsRegistryImpl {
+    public static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(Registries.ATTRIBUTE, CursesAndCryptics.MOD_ID);
+    public static final DeferredRegister.DataComponents DATA_COMPONENT_TYPES = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, CursesAndCryptics.MOD_ID);
+    public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(Registries.SOUND_EVENT, CursesAndCryptics.MOD_ID);
+    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(CursesAndCryptics.MOD_ID);
 
     public static final List<DeferredItem<Item>> itemsForCreativeTab = new ArrayList<>();
     
@@ -36,7 +36,7 @@ public class CursesAndCrusadesRegistryImpl {
 
     public static Holder<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(
-                                ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID,
+                                ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID,
                                         name)));
     }
 

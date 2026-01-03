@@ -1,10 +1,10 @@
-package com.kyleplo.curses_and_crusades.mixin;
+package com.kyleplo.curses_and_cryptics.mixin;
 
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-import com.kyleplo.curses_and_crusades.CursesAndCrusadesRegistry;
+import com.kyleplo.curses_and_cryptics.CursesAndCrypticsRegistry;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
@@ -25,8 +25,8 @@ public abstract class TargetingConditionsMixin {
         double originalRange = this.range;
         boolean originalLineOfSight = this.checkLineOfSight;
 
-        if (potentialTarget.getAttributes().hasAttribute(CursesAndCrusadesRegistry.DETECTABLE_RANGE)) {
-            double attrVal = potentialTarget.getAttributeValue(CursesAndCrusadesRegistry.DETECTABLE_RANGE);
+        if (potentialTarget.getAttributes().hasAttribute(CursesAndCrypticsRegistry.DETECTABLE_RANGE)) {
+            double attrVal = potentialTarget.getAttributeValue(CursesAndCrypticsRegistry.DETECTABLE_RANGE);
             this.range += attrVal;
             if (attrVal > 0) {
                 this.checkLineOfSight = false;

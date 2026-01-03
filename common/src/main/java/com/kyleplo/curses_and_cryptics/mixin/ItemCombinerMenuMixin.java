@@ -1,4 +1,4 @@
-package com.kyleplo.curses_and_crusades.mixin;
+package com.kyleplo.curses_and_cryptics.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

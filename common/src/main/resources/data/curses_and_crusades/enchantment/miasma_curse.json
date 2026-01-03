@@ -1,7 +1,7 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.curses_and_crusades.miasma_curse"
+    "translate": "enchantment.curses_and_cryptics.miasma_curse"
   },
   "effects": {
     "minecraft:attributes": [
@@ -11,8 +11,8 @@
           "base": 4,
           "per_level_above_first": 1
         },
-        "attribute": "curses_and_crusades:detectable_range",
-        "id": "curses_and_crusades:enchantment.miasma_curse",
+        "attribute": "curses_and_cryptics:detectable_range",
+        "id": "curses_and_cryptics:enchantment.miasma_curse",
         "operation": "add_value"
       }
     ]

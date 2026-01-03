@@ -1,4 +1,4 @@
-package com.kyleplo.curses_and_crusades.mixin;
+package com.kyleplo.curses_and_cryptics.mixin;
 
 import java.util.function.Consumer;
 
@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.kyleplo.curses_and_crusades.CursesAndCrusadesRegistry;
+import com.kyleplo.curses_and_cryptics.CursesAndCrypticsRegistry;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
@@ -38,7 +38,7 @@ public abstract class ItemStackMixin {
 
         for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
             Holder<Enchantment> holder = entry.getKey();
-            if (holder.is(CursesAndCrusadesRegistry.QUIXOTISM_CURSE)) {
+            if (holder.is(CursesAndCrypticsRegistry.QUIXOTISM_CURSE)) {
                 ci.setReturnValue(Item.MAX_BAR_WIDTH);
                 return;
             }
@@ -55,7 +55,7 @@ public abstract class ItemStackMixin {
 
         for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
             Holder<Enchantment> holder = entry.getKey();
-            if (holder.is(CursesAndCrusadesRegistry.QUIXOTISM_CURSE)) {
+            if (holder.is(CursesAndCrypticsRegistry.QUIXOTISM_CURSE)) {
                 ci.setReturnValue(ChatFormatting.RED.getColor());
                 return;
             }
@@ -72,7 +72,7 @@ public abstract class ItemStackMixin {
 
         for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
             Holder<Enchantment> holder = entry.getKey();
-            if (holder.is(CursesAndCrusadesRegistry.QUIXOTISM_CURSE)) {
+            if (holder.is(CursesAndCrypticsRegistry.QUIXOTISM_CURSE)) {
                 ci.setReturnValue(true);
                 return;
             }
@@ -88,11 +88,11 @@ public abstract class ItemStackMixin {
 
             for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
                 Holder<Enchantment> holder = entry.getKey();
-                if (holder.is(CursesAndCrusadesRegistry.QUIXOTISM_CURSE)) {
+                if (holder.is(CursesAndCrypticsRegistry.QUIXOTISM_CURSE)) {
                     tooltipDisplay = tooltipDisplay.withHidden(DataComponents.DAMAGE, true);
                 }
 
-                if (holder.is(CursesAndCrusadesRegistry.OBSCURING_CURSE)) {
+                if (holder.is(CursesAndCrypticsRegistry.OBSCURING_CURSE)) {
                     tooltipDisplay = tooltipDisplay.withHidden(DataComponents.ATTRIBUTE_MODIFIERS, true);
                 }
             }
@@ -100,7 +100,7 @@ public abstract class ItemStackMixin {
 
         ItemLore itemLore = itemStack.getOrDefault(DataComponents.LORE, ItemLore.EMPTY);
 
-        if (itemStack.has(CursesAndCrusadesRegistry.POST_GRINDSTONE_PROCESSING.value())) {
+        if (itemStack.has(CursesAndCrypticsRegistry.POST_GRINDSTONE_PROCESSING.value())) {
             tooltipDisplay = tooltipDisplay.withHidden(DataComponents.ATTRIBUTE_MODIFIERS, true).withHidden(DataComponents.ENCHANTMENTS, true).withHidden(DataComponents.STORED_ENCHANTMENTS, true);
             itemStack.set(DataComponents.LORE, itemLore.withLineAdded(Component.translatable("container.grindstone.whetstone_take_item_hint").withStyle(ChatFormatting.RESET).withStyle(ChatFormatting.GRAY)));
         }
@@ -124,7 +124,7 @@ public abstract class ItemStackMixin {
 
             for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
                 Holder<Enchantment> holder = entry.getKey();
-                if (holder.is(CursesAndCrusadesRegistry.IMMUTABILITY_CURSE)) {
+                if (holder.is(CursesAndCrypticsRegistry.IMMUTABILITY_CURSE)) {
                     return false;
                 }
             }

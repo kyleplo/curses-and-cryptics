@@ -1,7 +1,7 @@
 {
     "values": [
-        "curses_and_crusades:whetstone",
-        "curses_and_crusades:blessed_whetstone",
-        "curses_and_crusades:enchanted_blessed_whetstone"
+        "curses_and_cryptics:whetstone",
+        "curses_and_cryptics:blessed_whetstone",
+        "curses_and_cryptics:enchanted_blessed_whetstone"
     ]
 }

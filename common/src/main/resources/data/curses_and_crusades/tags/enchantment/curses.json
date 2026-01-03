@@ -1,9 +1,9 @@
 {
     "values": [
-        "curses_and_crusades:immutability_curse",
-        "curses_and_crusades:obscuring_curse",
-        "curses_and_crusades:quixotism_curse",
-        "curses_and_crusades:instability_curse",
-        "curses_and_crusades:miasma_curse"
+        "curses_and_cryptics:immutability_curse",
+        "curses_and_cryptics:obscuring_curse",
+        "curses_and_cryptics:quixotism_curse",
+        "curses_and_cryptics:instability_curse",
+        "curses_and_cryptics:miasma_curse"
     ]
 }

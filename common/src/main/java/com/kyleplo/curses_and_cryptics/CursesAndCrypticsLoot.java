@@ -1,4 +1,4 @@
-package com.kyleplo.curses_and_crusades;
+package com.kyleplo.curses_and_cryptics;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,10 +23,10 @@ import net.minecraft.world.level.storage.loot.entries.EmptyLootItem;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-public class CursesAndCrusadesLoot {
+public class CursesAndCrypticsLoot {
     public static void injectLoot(ResourceKey<LootTable> key, LootTable table, HolderLookup.Provider registries,
             Consumer<LootPool.Builder> addPool) {
-        if (!CursesAndCrusades.config.whetstoneLoot) {
+        if (!CursesAndCryptics.config.whetstoneLoot) {
             return;
         }
         
@@ -35,22 +35,22 @@ public class CursesAndCrusadesLoot {
             addPool.accept(new LootPool.Builder()
                     .setRolls(UniformGenerator.between(0, 2))
                     .add(EmptyLootItem.emptyItem().setWeight(16))
-                    .add(LootItem.lootTableItem(CursesAndCrusadesRegistry.WHETSTONE.value()).setWeight(10))
-                    .add(LootItem.lootTableItem(CursesAndCrusadesRegistry.BLESSED_WHETSTONE.value()).setWeight(1)));
+                    .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.WHETSTONE.value()).setWeight(10))
+                    .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.BLESSED_WHETSTONE.value()).setWeight(1)));
         } else if (BuiltInLootTables.SIMPLE_DUNGEON.equals(key) || BuiltInLootTables.ABANDONED_MINESHAFT.equals(key)
                 || BuiltInLootTables.STRONGHOLD_LIBRARY.equals(key) || BuiltInLootTables.UNDERWATER_RUIN_BIG.equals(key)
                 || BuiltInLootTables.WOODLAND_MANSION.equals(key)
                 || BuiltInLootTables.TRIAL_CHAMBERS_CORRIDOR.equals(key)) {
             addPool.accept(new LootPool.Builder()
                     .add(EmptyLootItem.emptyItem().setWeight(8))
-                    .add(LootItem.lootTableItem(CursesAndCrusadesRegistry.WHETSTONE.value()).setWeight(5))
-                    .add(LootItem.lootTableItem(CursesAndCrusadesRegistry.BLESSED_WHETSTONE.value()).setWeight(3))
-                    .add(LootItem.lootTableItem(CursesAndCrusadesRegistry.ENCHANTED_BLESSED_WHETSTONE.value()).setWeight(1)));
+                    .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.WHETSTONE.value()).setWeight(5))
+                    .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.BLESSED_WHETSTONE.value()).setWeight(3))
+                    .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.ENCHANTED_BLESSED_WHETSTONE.value()).setWeight(1)));
         }
     }
 
     public static void setTrades () {
-        if (CursesAndCrusades.config.whetstoneTrade) {
+        if (CursesAndCryptics.config.whetstoneTrade) {
             setTradesFor(VillagerProfession.WEAPONSMITH);
             setTradesFor(VillagerProfession.ARMORER);
             setTradesFor(VillagerProfession.TOOLSMITH);
@@ -64,7 +64,7 @@ public class CursesAndCrusadesLoot {
         newSecondTrades.add(new ItemListing () {
             @Override
             public MerchantOffer getOffer(Entity entity, RandomSource randomSource) {
-                return new MerchantOffer(new ItemCost(Items.EMERALD, 8), new ItemStack(CursesAndCrusadesRegistry.WHETSTONE, 1), 3, 5, 0.2f);
+                return new MerchantOffer(new ItemCost(Items.EMERALD, 8), new ItemStack(CursesAndCrypticsRegistry.WHETSTONE, 1), 3, 5, 0.2f);
             }
         });
         ItemListing[] newSecondTradesArray = new ItemListing[newSecondTrades.size()];

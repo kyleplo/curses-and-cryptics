@@ -1,9 +1,9 @@
 {
   "anvil_cost": 8,
   "description": {
-    "translate": "enchantment.curses_and_crusades.instability_curse"
+    "translate": "enchantment.curses_and_cryptics.instability_curse"
   },
-  "exclusive_set": "curses_and_crusades:immutability_curse",
+  "exclusive_set": "curses_and_cryptics:immutability_curse",
   "effects": {},
   "max_cost": {
     "base": 50,

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "curses_and_crusades:item/whetstone"
+    "model": "curses_and_cryptics:item/whetstone"
   }
 }

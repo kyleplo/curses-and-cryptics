@@ -1,4 +1,4 @@
-package com.kyleplo.curses_and_crusades;
+package com.kyleplo.curses_and_cryptics;
 
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
@@ -22,17 +22,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.enchantment.Enchantment;
 
-public class CursesAndCrusadesRegistry {
+public class CursesAndCrypticsRegistry {
     public static final ResourceKey<Enchantment> IMMUTABILITY_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
-            ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, "immutability_curse"));
+            ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "immutability_curse"));
     public static final ResourceKey<Enchantment> OBSCURING_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
-            ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, "obscuring_curse"));
+            ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "obscuring_curse"));
     public static final ResourceKey<Enchantment> QUIXOTISM_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
-            ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, "quixotism_curse"));
+            ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "quixotism_curse"));
     public static final ResourceKey<Enchantment> INSTABILITY_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
-            ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, "instability_curse"));
+            ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "instability_curse"));
     public static final ResourceKey<Enchantment> MIASMA_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
-            ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, "miasma_curse"));
+            ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "miasma_curse"));
 
     public static final Holder<Attribute> DETECTABLE_RANGE = registerAttribute("detectable_range",
                 (new RangedAttribute("attribute.name.detectable_range", 0.0, -16.0, 16.0)).setSyncable(true)
@@ -48,7 +48,7 @@ public class CursesAndCrusadesRegistry {
     public static Holder<Item> ENCHANTED_BLESSED_WHETSTONE = registerItem("enchanted_blessed_whetstone", Item::new, new Item.Properties().rarity(Rarity.RARE).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true));
 
     public static TagKey<Item> WHETSTONES = TagKey.create(Registries.ITEM,
-            ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, "whetstones"));
+            ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "whetstones"));
 
     public static void initialize() {
         POST_ANVIL_PROCESSING = registerDataComponentType("post_anvil_processing", (builder -> {

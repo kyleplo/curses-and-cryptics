@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'curses_and_crusades'
+rootProject.name = 'curses_and_cryptics'
 
 include 'common'
 include 'fabric'

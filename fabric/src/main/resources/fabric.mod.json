@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "curses_and_crusades",
+  "id": "curses_and_cryptics",
   "version": "${version}",
-  "name": "Curses & Crusades",
+  "name": "Curses and Cryptics",
   "description": "This is an example description! Tell everyone what your mod is about!",
   "authors": [
     "Me!"
@@ -12,18 +12,18 @@
     "sources": "https://github.com/FabricMC/fabric-example-mod"
   },
   "license": "CC0-1.0",
-  "icon": "assets/curses_and_crusades/icon.png",
+  "icon": "assets/curses_and_cryptics/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.kyleplo.curses_and_crusades.fabric.CursesAndCrusadesFabric"
+      "com.kyleplo.curses_and_cryptics.fabric.CursesAndCrypticsFabric"
     ],
     "client": [
-      "com.kyleplo.curses_and_crusades.fabric.client.CursesAndCrusadesFabricClient"
+      "com.kyleplo.curses_and_cryptics.fabric.client.CursesAndCrypticsFabricClient"
     ]
   },
   "mixins": [
-    "curses_and_crusades.mixins.json"
+    "curses_and_cryptics.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=0.18.3",

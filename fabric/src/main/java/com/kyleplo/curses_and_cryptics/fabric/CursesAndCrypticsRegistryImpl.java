@@ -1,11 +1,11 @@
-package com.kyleplo.curses_and_crusades.fabric;
+package com.kyleplo.curses_and_cryptics.fabric;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
-import com.kyleplo.curses_and_crusades.CursesAndCrusades;
+import com.kyleplo.curses_and_cryptics.CursesAndCryptics;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -18,12 +18,12 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
 
-public class CursesAndCrusadesRegistryImpl {
+public class CursesAndCrypticsRegistryImpl {
     public static final List<Item> itemsForCreativeTab = new ArrayList<>();
 
     public static Holder<Attribute> registerAttribute(String name, Attribute attribute) {
         return Registry.registerForHolder(BuiltInRegistries.ATTRIBUTE,
-                ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, name),
+                ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name),
                 attribute);
     }
 
@@ -37,16 +37,16 @@ public class CursesAndCrusadesRegistryImpl {
     public static Holder<SoundEvent> registerSoundEvent(String name) {
         return Holder.direct(
                 Registry.register(BuiltInRegistries.SOUND_EVENT,
-                        ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, name),
+                        ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name),
                         SoundEvent.createVariableRangeEvent(
-                                ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID,
+                                ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID,
                                         name))));
     }
 
     public static Holder<Item> registerItem(String name, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
-        Item item = itemFactory.apply(settings.setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, name))));
+        Item item = itemFactory.apply(settings.setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name))));
         itemsForCreativeTab.add(item);
         return Registry.registerForHolder(BuiltInRegistries.ITEM,
-                ResourceLocation.fromNamespaceAndPath(CursesAndCrusades.MOD_ID, name), item);
+                ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name), item);
     }
 }

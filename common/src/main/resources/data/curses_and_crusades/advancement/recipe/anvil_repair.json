@@ -13,13 +13,13 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "curses_and_crusades:anvil_repair/chipped"
+        "recipe": "curses_and_cryptics:anvil_repair/chipped"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
     "has_the_other_recipe": {
       "conditions": {
-        "recipe": "curses_and_crusades:anvil_repair/damaged"
+        "recipe": "curses_and_cryptics:anvil_repair/damaged"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -33,8 +33,8 @@
   ],
   "rewards": {
     "recipes": [
-      "curses_and_crusades:anvil_repair/chipped",
-      "curses_and_crusades:anvil_repair/damaged"
+      "curses_and_cryptics:anvil_repair/chipped",
+      "curses_and_cryptics:anvil_repair/damaged"
     ]
   }
 }

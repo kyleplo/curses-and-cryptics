@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "curses_and_crusades:item/blessed_whetstone"
+    "layer0": "curses_and_cryptics:item/blessed_whetstone"
   }
 }

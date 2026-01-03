@@ -1,9 +1,9 @@
-package com.kyleplo.curses_and_crusades.mixin;
+package com.kyleplo.curses_and_cryptics.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
-import com.kyleplo.curses_and_crusades.CursesAndCrusadesRegistry;
+import com.kyleplo.curses_and_cryptics.CursesAndCrypticsRegistry;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
@@ -32,20 +32,20 @@ public class GrindstoneMenuMixin {
         ItemStack originalValue = original.call(input1, input2);
 
         if (originalValue.isEmpty() && !input1.isEmpty() && !input2.isEmpty()
-                && (input1.is(CursesAndCrusadesRegistry.WHETSTONES) || input2.is(CursesAndCrusadesRegistry.WHETSTONES))) {
-            if (input1.is(CursesAndCrusadesRegistry.WHETSTONES) && input2.is(CursesAndCrusadesRegistry.WHETSTONES)) {
+                && (input1.is(CursesAndCrypticsRegistry.WHETSTONES) || input2.is(CursesAndCrypticsRegistry.WHETSTONES))) {
+            if (input1.is(CursesAndCrypticsRegistry.WHETSTONES) && input2.is(CursesAndCrypticsRegistry.WHETSTONES)) {
                 return originalValue;
             }
 
-            ItemStack whetstone = input1.is(CursesAndCrusadesRegistry.WHETSTONES) ? input1 : input2;
-            ItemStack other = input1.is(CursesAndCrusadesRegistry.WHETSTONES) ? input2 : input1;
+            ItemStack whetstone = input1.is(CursesAndCrypticsRegistry.WHETSTONES) ? input1 : input2;
+            ItemStack other = input1.is(CursesAndCrypticsRegistry.WHETSTONES) ? input2 : input1;
 
             if (!EnchantmentHelper.hasAnyEnchantments(other)) {
                 return originalValue;
             }
 
             ItemStack resultItem;
-            if (whetstone.is(CursesAndCrusadesRegistry.ENCHANTED_BLESSED_WHETSTONE)) {
+            if (whetstone.is(CursesAndCrypticsRegistry.ENCHANTED_BLESSED_WHETSTONE)) {
                 resultItem = removeCursesFrom(other.copy());
             } else {
                 resultItem = other.copy();
@@ -64,7 +64,7 @@ public class GrindstoneMenuMixin {
                 
                 for (int i = 0; i < 50; i++) {
                     int rand = random.nextInt(itemEnchantments.size());
-                    if (whetstone.is(CursesAndCrusadesRegistry.BLESSED_WHETSTONE) || !enchants[rand].is(EnchantmentTags.CURSE)) {
+                    if (whetstone.is(CursesAndCrypticsRegistry.BLESSED_WHETSTONE) || !enchants[rand].is(EnchantmentTags.CURSE)) {
                         itemEnchantments = EnchantmentHelper.updateEnchantments(resultItem, (mutable) -> {
                             mutable.removeIf((holder) -> {
                                 return enchants[rand].getRegisteredName().equals(holder.getRegisteredName());
@@ -84,7 +84,7 @@ public class GrindstoneMenuMixin {
                     resultItem = resultItem.transmuteCopy(Items.BOOK);
                 }
             }
-            resultItem.set(CursesAndCrusadesRegistry.POST_GRINDSTONE_PROCESSING.value(), whetstone.is(CursesAndCrusadesRegistry.BLESSED_WHETSTONE));
+            resultItem.set(CursesAndCrypticsRegistry.POST_GRINDSTONE_PROCESSING.value(), whetstone.is(CursesAndCrypticsRegistry.BLESSED_WHETSTONE));
             return resultItem;
         }
         return originalValue;

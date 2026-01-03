@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     "minecraft:chipped_anvil",
-    "#curses_and_crusades:anvil_repair"
+    "#curses_and_cryptics:anvil_repair"
   ],
   "result": {
     "count": 1,
