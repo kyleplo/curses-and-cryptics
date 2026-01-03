@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:story/enchant_item",
+  "criteria": {
+    "1": {
+      "conditions": {
+        "items": [
+          {
+            "predicates": {
+                "minecraft:enchantments": [{
+                    "enchantments": [
+                        "curses_and_cryptics:quixotism_curse"
+                    ]
+                }]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.curses_and_cryptics.quixotic.description"
+    },
+    "icon": {
+      "id": "minecraft:breeze_rod"
+    },
+    "title": {
+      "translate": "advancements.curses_and_cryptics.quixotic.title"
+    }
+  },
+  "requirements": [
+    [
+      "1"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

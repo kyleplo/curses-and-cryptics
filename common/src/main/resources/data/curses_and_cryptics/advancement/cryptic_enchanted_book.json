@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:story/enchant_item",
+  "criteria": {
+    "1": {
+      "conditions": {
+        "items": [
+          {
+            "items": "curses_and_cryptics:cryptic_enchanted_book"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.curses_and_cryptics.cryptic_enchanted_book.description"
+    },
+    "icon": {
+      "id": "curses_and_cryptics:cryptic_enchanted_book"
+    },
+    "title": {
+      "translate": "advancements.curses_and_cryptics.cryptic_enchanted_book.title"
+    }
+  },
+  "requirements": [
+    [
+      "1"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

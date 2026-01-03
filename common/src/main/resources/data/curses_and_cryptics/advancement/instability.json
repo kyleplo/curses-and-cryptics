@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:story/enchant_item",
+  "criteria": {
+    "1": {
+      "conditions": {
+        "items": [
+          {
+            "predicates": {
+                "minecraft:enchantments": [{
+                    "enchantments": [
+                        "curses_and_cryptics:instability_curse"
+                    ]
+                }]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.curses_and_cryptics.instability.description"
+    },
+    "icon": {
+      "id": "minecraft:cracked_stone_bricks"
+    },
+    "title": {
+      "translate": "advancements.curses_and_cryptics.instability.title"
+    }
+  },
+  "requirements": [
+    [
+      "1"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

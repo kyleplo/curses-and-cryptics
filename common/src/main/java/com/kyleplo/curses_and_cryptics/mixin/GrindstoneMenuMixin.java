@@ -88,9 +88,7 @@ public class GrindstoneMenuMixin {
                     resultItem = resultItem.transmuteCopy(Items.BOOK);
                 }
             }
-            if (CursesAndCryptics.config.whetstoneHideResult) {
-                resultItem.set(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value(), Unit.INSTANCE);
-            }
+            resultItem.set(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value(), Unit.INSTANCE);
             return resultItem;
         }
         return originalValue;

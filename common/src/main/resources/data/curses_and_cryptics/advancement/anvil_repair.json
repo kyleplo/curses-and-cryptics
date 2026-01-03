@@ -1,0 +1,56 @@
+{
+  "parent": "minecraft:story/smelt_iron",
+  "criteria": {
+    "1": {
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "tag": "minecraft:anvil"
+              }
+            }
+          }
+        ],
+        "player": {
+          "equipment": {
+            "mainhand": {
+              "items": "#curses_and_cryptics:anvil_repair"
+            }
+          }
+        }
+      },
+      "trigger": "minecraft:default_block_use"
+    },
+    "2": {
+        "conditions": {
+          "recipe_id": "curses_and_cryptics:anvil_repair/chipped"
+        },
+        "trigger": "minecraft:recipe_crafted"
+    },
+    "3": {
+        "conditions": {
+          "recipe_id": "curses_and_cryptics:anvil_repair/damaged"
+        },
+        "trigger": "minecraft:recipe_crafted"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.curses_and_cryptics.anvil_repair.description"
+    },
+    "icon": {
+      "id": "minecraft:chipped_anvil"
+    },
+    "title": {
+      "translate": "advancements.curses_and_cryptics.anvil_repair.title"
+    }
+  },
+  "requirements": [
+    [
+      "1", "2", "3"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

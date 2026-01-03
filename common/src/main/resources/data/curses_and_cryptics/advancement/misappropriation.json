@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:story/enchant_item",
+  "criteria": {
+    "1": {
+      "conditions": {
+        "items": [
+          {
+            "predicates": {
+                "minecraft:enchantments": [{
+                    "enchantments": [
+                        "curses_and_cryptics:misappropriation_curse"
+                    ]
+                }]
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.curses_and_cryptics.misappropriation.description"
+    },
+    "icon": {
+      "id": "curses_and_cryptics:misappropriation_sigil"
+    },
+    "title": {
+      "translate": "advancements.curses_and_cryptics.misappropriation.title"
+    }
+  },
+  "requirements": [
+    [
+      "1"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import com.kyleplo.curses_and_cryptics.CursesAndCryptics;
 import com.kyleplo.curses_and_cryptics.CursesAndCrypticsRegistry;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -67,14 +68,14 @@ public abstract class ItemStackMixin {
     public void isBarVisible(CallbackInfoReturnable<Boolean> ci) {
         ItemStack itemStack = ItemStack.class.cast(this);
 
-        if (!itemStack.isEnchanted() || itemStack.has(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value())) return;
+        if (!itemStack.isEnchanted()) return;
 
         ItemEnchantments itemEnchantments = itemStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
 
         for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
             Holder<Enchantment> holder = entry.getKey();
             if (holder.is(CursesAndCrypticsRegistry.QUIXOTISM_CURSE)) {
-                ci.setReturnValue(true);
+                ci.setReturnValue(!itemStack.has(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value()));
                 return;
             }
         }
@@ -102,7 +103,7 @@ public abstract class ItemStackMixin {
         ItemLore originalItemLore = itemStack.getOrDefault(DataComponents.LORE, ItemLore.EMPTY);
         ItemLore itemLore = originalItemLore;
 
-        if (itemStack.has(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value())) {
+        if (itemStack.has(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value()) && CursesAndCryptics.config.whetstoneHideResult) {
             tooltipDisplay = tooltipDisplay.withHidden(DataComponents.ATTRIBUTE_MODIFIERS, true).withHidden(DataComponents.ENCHANTMENTS, true).withHidden(DataComponents.STORED_ENCHANTMENTS, true);
             itemLore = itemLore.withLineAdded(Component.translatable("container.take_item_hint").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(false)));
         }

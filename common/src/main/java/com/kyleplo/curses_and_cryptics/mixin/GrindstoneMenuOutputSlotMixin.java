@@ -49,7 +49,9 @@ public class GrindstoneMenuOutputSlotMixin {
             }
         }
 
-        takenItemStack.remove(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value());
+        if (!takenItemStack.isEmpty()) {
+            takenItemStack.remove(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value());
+        }
     }
 
     @WrapOperation(method = "onTake", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/Container;setItem(ILnet/minecraft/world/item/ItemStack;)V"))

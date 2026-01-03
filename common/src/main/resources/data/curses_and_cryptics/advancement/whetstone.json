@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:adventure/trade",
+  "criteria": {
+    "1": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#curses_and_cryptics:whetstones"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.curses_and_cryptics.whetstone.description"
+    },
+    "icon": {
+      "id": "curses_and_cryptics:whetstone"
+    },
+    "title": {
+      "translate": "advancements.curses_and_cryptics.whetstone.title"
+    }
+  },
+  "requirements": [
+    [
+      "1"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

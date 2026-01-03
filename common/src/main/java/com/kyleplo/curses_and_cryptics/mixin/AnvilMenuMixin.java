@@ -93,7 +93,7 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
                     result.enchant(level.registryAccess().getOrThrow(CursesAndCrypticsRegistry.MISAPPROPRIATION_CURSE), 1);
                 }
                 anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(result);
-                cost.set(stack1.getOrDefault(DataComponents.REPAIR_COST, 0));
+                cost.set(Math.max(stack1.getOrDefault(DataComponents.REPAIR_COST, 0), 1));
             });
         }
 
@@ -104,12 +104,14 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
             }
 
             this.access.execute((level, blockPos) -> {
+                boolean enchantsApplied = false;
                 for (int enchantLevel = stack2.getOrDefault(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_LEVEL.value(), 1); enchantLevel > 0; enchantLevel -= 0) {
                     Stream<Holder<Enchantment>> enchants = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT)
                         .get(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_ENCHANTMENT).map(HolderSet.Named::stream).orElse(Stream.empty());
                     List<EnchantmentInstance> possibleEnchants = EnchantmentHelper.selectEnchantment(level.random,
                             stack1, enchantLevel, enchants);
                     if (possibleEnchants.size() > 0 && EnchantmentHelper.isEnchantmentCompatible(result.getEnchantments().keySet(), possibleEnchants.getFirst().enchantment())) {
+                        enchantsApplied = true;
                         result.enchant(possibleEnchants.getFirst().enchantment(),
                                     possibleEnchants.getFirst().level());
                         enchantLevel -= Math.max(possibleEnchants.getFirst().enchantment().value().getAnvilCost(), 2);
@@ -117,9 +119,12 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
                         enchantLevel -= 5;
                     }
                 }
-                result.set(DataComponents.REPAIR_COST, AnvilMenu.calculateIncreasedRepairCost(stack1.getOrDefault(DataComponents.REPAIR_COST, 0)));
-                anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(result);
-                cost.set(stack1.getOrDefault(DataComponents.REPAIR_COST, 0) + stack2.getOrDefault(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_LEVEL.value(), 1));
+
+                if (enchantsApplied) {
+                    result.set(DataComponents.REPAIR_COST, AnvilMenu.calculateIncreasedRepairCost(stack1.getOrDefault(DataComponents.REPAIR_COST, 0)));
+                    anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(result);
+                    cost.set(stack1.getOrDefault(DataComponents.REPAIR_COST, 0) + stack2.getOrDefault(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_LEVEL.value(), 1));
+                }
             });
         }
 

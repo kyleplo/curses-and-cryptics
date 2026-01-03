@@ -30,5 +30,24 @@
     "container.take_item_hint": "Take item to apply changes",
 
     "tag.item.curses_and_cryptics.anvil_repair": "Anvil Repair Ingredients",
-    "tag.item.curses_and_cryptics.whetstones": "Whetstones"
+    "tag.item.curses_and_cryptics.whetstones": "Whetstones",
+
+    "advancements.curses_and_cryptics.obscuring.title": "Mine Around and Find Out",
+    "advancements.curses_and_cryptics.obscuring.description": "Obtain an item with Curse of Obscuring.",
+    "advancements.curses_and_cryptics.quixotic.title": "Bane of Windmills",
+    "advancements.curses_and_cryptics.quixotic.description": "Obtain an item with Curse of Quixotism.",
+    "advancements.curses_and_cryptics.misappropriation.title": "Nuh Uh",
+    "advancements.curses_and_cryptics.misappropriation.description": "Use the Misappropriation Sigil to reset an item's repair cost.",
+    "advancements.curses_and_cryptics.miasma.title": "More Than Mints Required",
+    "advancements.curses_and_cryptics.miasma.description": "Obtain an item with Curse of Miasma.",
+    "advancements.curses_and_cryptics.anvil_repair.title": "Good As New",
+    "advancements.curses_and_cryptics.anvil_repair.description": "Repair an anvil using an Iron Block.",
+    "advancements.curses_and_cryptics.whetstone.title": "Getting Whet",
+    "advancements.curses_and_cryptics.whetstone.description": "Now you can finally grind off all of those curses.",
+    "advancements.curses_and_cryptics.instability.title": "Too Unstable for This World",
+    "advancements.curses_and_cryptics.instability.description": "Obtain an item with Curse of Instability.",
+    "advancements.curses_and_cryptics.immutability.title": "Can't Touch This",
+    "advancements.curses_and_cryptics.immutability.description": "Obtain an item with Curse of Immutability.",
+    "advancements.curses_and_cryptics.cryptic_enchanted_book.title": "Crafting the Cryptic",
+    "advancements.curses_and_cryptics.cryptic_enchanted_book.description": "Obtain a Cryptic Enchanted Book."
 }
