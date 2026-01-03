@@ -2,13 +2,16 @@ package com.kyleplo.curses_and_crusades.neoforge;
 
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.LootPool;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.GrindstoneEvent;
+import net.neoforged.neoforge.event.LootTableLoadEvent;
 
 import com.kyleplo.curses_and_crusades.CursesAndCrusades;
+import com.kyleplo.curses_and_crusades.CursesAndCrusadesLoot;
 import com.kyleplo.curses_and_crusades.CursesAndCrusadesRegistry;
 
 @Mod(CursesAndCrusades.MOD_ID)
@@ -24,6 +27,7 @@ public final class CursesAndCrusadesNeoForge {
         
         modBus.addListener(CursesAndCrusadesNeoForge::onBuildCreativeModeTabContents);
         NeoForge.EVENT_BUS.addListener(CursesAndCrusadesNeoForge::onGrindstoneTake);
+        NeoForge.EVENT_BUS.addListener(CursesAndCrusadesNeoForge::onLootTableLoad);
     }
 
     private static void onBuildCreativeModeTabContents (BuildCreativeModeTabContentsEvent event) {
@@ -44,5 +48,11 @@ public final class CursesAndCrusadesNeoForge {
             bottom.shrink(1);
             event.setNewBottomItem(bottom);
         }
+    }
+
+    private static void onLootTableLoad (LootTableLoadEvent event) {
+        CursesAndCrusadesLoot.injectLoot(event.getKey(), event.getTable(), event.getRegistries(), (LootPool.Builder pool) -> {
+            event.getTable().addPool(pool.build());
+        });
     }
 }

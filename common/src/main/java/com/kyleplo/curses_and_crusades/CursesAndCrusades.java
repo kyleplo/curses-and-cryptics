@@ -7,5 +7,6 @@ public final class CursesAndCrusades {
     public static void init() {
         config = CursesAndCrusadesConfig.init();
         CursesAndCrusadesRegistry.initialize();
+        CursesAndCrusadesLoot.setTrades();
     }
 }

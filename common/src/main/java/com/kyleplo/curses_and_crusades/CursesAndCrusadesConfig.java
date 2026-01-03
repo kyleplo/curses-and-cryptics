@@ -21,6 +21,9 @@ public class CursesAndCrusadesConfig {
     public double chippedAnvilCurseChance = 0.05;
     public double damagedAnvilCurseChance = 0.1;
 
+    public boolean whetstoneLoot = true;
+    public boolean whetstoneTrade = false;
+
     public static CursesAndCrusadesConfig init() {
         CursesAndCrusadesConfig config = null;
 
