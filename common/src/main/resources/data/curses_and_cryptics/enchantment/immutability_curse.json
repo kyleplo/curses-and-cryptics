@@ -3,7 +3,7 @@
   "description": {
     "translate": "enchantment.curses_and_cryptics.immutability_curse"
   },
-  "exclusive_set": "curses_and_cryptics:instability_curse",
+  "exclusive_set": "#curses_and_cryptics:modifies_anvil_exclusive_set",
   "effects": {},
   "max_cost": {
     "base": 50,

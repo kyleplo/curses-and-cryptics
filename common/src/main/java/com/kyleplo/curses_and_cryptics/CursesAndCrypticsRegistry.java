@@ -36,6 +36,8 @@ public class CursesAndCrypticsRegistry {
             ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "instability_curse"));
     public static final ResourceKey<Enchantment> MIASMA_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
             ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "miasma_curse"));
+    public static final ResourceKey<Enchantment> MISAPPROPRIATION_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
+            ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "misappropriation_curse"));
 
     public static final Holder<Attribute> DETECTABLE_RANGE = registerAttribute("detectable_range",
                 (new RangedAttribute("attribute.name.detectable_range", 0.0, -16.0, 16.0)).setSyncable(true)
@@ -59,6 +61,8 @@ public class CursesAndCrypticsRegistry {
 
     public static TagKey<Item> WHETSTONES = TagKey.create(Registries.ITEM,
             ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "whetstones"));
+
+    public static Holder<Item> MISAPPROPRIATION_SIGIL = registerItem("misappropriation_sigil", Item::new, new Item.Properties().rarity(Rarity.RARE).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true).stacksTo(1));
 
     public static void initialize() {
         POST_ANVIL_PROCESSING = registerDataComponentType("post_anvil_processing", (builder -> {

@@ -1,6 +1,8 @@
 {
     "replace": false,
     "values": [
-        "#minecraft:curse"
+        "#curses_and_cryptics:curses",
+        "minecraft:binding_curse",
+        "minecraft:vanishing_curse"
     ]
 }

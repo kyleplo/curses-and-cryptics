@@ -31,6 +31,9 @@ public class CursesAndCrypticsConfig {
     public boolean crypticEnchantedBookCombining = true;
     public boolean crypticEnchantedBookGrindstoning = true;
 
+    public boolean misappropriationSigilLoot = true;
+    public boolean misappropriationCurse = true;
+
     public static CursesAndCrypticsConfig init() {
         CursesAndCrypticsConfig config = null;
 

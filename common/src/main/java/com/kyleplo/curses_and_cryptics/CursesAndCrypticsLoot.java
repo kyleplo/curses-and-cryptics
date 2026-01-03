@@ -65,6 +65,14 @@ public class CursesAndCrypticsLoot {
                         .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK.value()).setWeight(1).apply(SetCrypticEnchantedBookLevelFunction.setLevel(UniformGenerator.between(15, 32)))));
             }
         }
+
+        if (CursesAndCryptics.config.misappropriationSigilLoot) {
+            if (BuiltInLootTables.RUINED_PORTAL.equals(key) || BuiltInLootTables.BASTION_OTHER.equals(key) || BuiltInLootTables.BASTION_BRIDGE.equals(key) || BuiltInLootTables.BASTION_TREASURE.equals(key) || BuiltInLootTables.TRIAL_CHAMBERS_ENTRANCE.equals(key) || BuiltInLootTables.ANCIENT_CITY.equals(key) || BuiltInLootTables.STRONGHOLD_CORRIDOR.equals(key) || BuiltInLootTables.SHIPWRECK_TREASURE.equals(key) || BuiltInLootTables.BURIED_TREASURE.equals(key)) {
+                addPool.accept(new LootPool.Builder()
+                        .add(EmptyLootItem.emptyItem().setWeight(7))
+                        .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.MISAPPROPRIATION_SIGIL.value()).setWeight(1)));
+            }
+        }
     }
 
     public static void setTrades () {

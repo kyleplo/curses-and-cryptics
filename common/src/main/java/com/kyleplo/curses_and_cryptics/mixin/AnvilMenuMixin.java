@@ -52,6 +52,8 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
         ItemStack stack1 = anvilMenu.slots.get(0).getItem();
         ItemStack stack2 = anvilMenu.slots.get(1).getItem();
 
+        boolean hasMisappropriationCurse = false;
+
         if (!stack2.isEmpty()) {
             ItemEnchantments itemEnchantments = stack1.getOrDefault(DataComponents.ENCHANTMENTS,
                     ItemEnchantments.EMPTY);
@@ -60,6 +62,10 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
                 if (holder.is(CursesAndCrypticsRegistry.IMMUTABILITY_CURSE)) {
                     anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(ItemStack.EMPTY);
                     return;
+                }
+
+                if (holder.is(CursesAndCrypticsRegistry.MISAPPROPRIATION_CURSE)) {
+                    hasMisappropriationCurse = true;
                 }
             }
         }
@@ -76,6 +82,19 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
             anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(resultingBook);
             int potentialCost = levelSum - (Math.max(stack1Level, stack2Level) / 2);
             cost.set(Math.max(1, levelSum > 40 ? Math.max(potentialCost, 41) : potentialCost));
+        }
+
+        if (stack1.has(DataComponents.REPAIR_COST) && !hasMisappropriationCurse && stack2.is(CursesAndCrypticsRegistry.MISAPPROPRIATION_SIGIL)) {
+            ItemStack result = stack1.copy();
+            result.remove(DataComponents.REPAIR_COST);
+
+            this.access.execute((level, blockPos) -> {
+                if (CursesAndCryptics.config.misappropriationCurse) {
+                    result.enchant(level.registryAccess().getOrThrow(CursesAndCrypticsRegistry.MISAPPROPRIATION_CURSE), 1);
+                }
+                anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(result);
+                cost.set(stack1.getOrDefault(DataComponents.REPAIR_COST, 0));
+            });
         }
 
         if (stack1.has(DataComponents.ENCHANTABLE) && ((!stack1.is(Items.BOOK) && !stack1.has(DataComponents.STORED_ENCHANTMENTS)) || CursesAndCryptics.config.crypticEnchantedBookWorksOnBooks) && stack2.is(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK)) {

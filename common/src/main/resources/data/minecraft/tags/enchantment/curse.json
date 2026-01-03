@@ -1,6 +1,7 @@
 {
     "replace": false,
     "values": [
-        "#curses_and_cryptics:curses"
+        "#curses_and_cryptics:curses",
+        "curses_and_cryptics:misappropriation_curse"
     ]
 }
