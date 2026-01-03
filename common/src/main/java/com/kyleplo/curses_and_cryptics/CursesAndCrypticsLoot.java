@@ -26,26 +26,44 @@ import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 public class CursesAndCrypticsLoot {
     public static void injectLoot(ResourceKey<LootTable> key, LootTable table, HolderLookup.Provider registries,
             Consumer<LootPool.Builder> addPool) {
-        if (!CursesAndCryptics.config.whetstoneLoot) {
-            return;
+        if (CursesAndCryptics.config.whetstoneLoot) {
+            if (BuiltInLootTables.VILLAGE_TOOLSMITH.equals(key) || BuiltInLootTables.VILLAGE_ARMORER.equals(key)
+                    || BuiltInLootTables.VILLAGE_WEAPONSMITH.equals(key)) {
+                addPool.accept(new LootPool.Builder()
+                        .setRolls(UniformGenerator.between(0, 2))
+                        .add(EmptyLootItem.emptyItem().setWeight(16))
+                        .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.WHETSTONE.value()).setWeight(10))
+                        .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.BLESSED_WHETSTONE.value()).setWeight(1)));
+            } else if (BuiltInLootTables.SIMPLE_DUNGEON.equals(key) || BuiltInLootTables.ABANDONED_MINESHAFT.equals(key)
+                    || BuiltInLootTables.STRONGHOLD_LIBRARY.equals(key) || BuiltInLootTables.UNDERWATER_RUIN_BIG.equals(key)
+                    || BuiltInLootTables.WOODLAND_MANSION.equals(key)
+                    || BuiltInLootTables.TRIAL_CHAMBERS_CORRIDOR.equals(key)) {
+                addPool.accept(new LootPool.Builder()
+                        .add(EmptyLootItem.emptyItem().setWeight(8))
+                        .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.WHETSTONE.value()).setWeight(5))
+                        .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.BLESSED_WHETSTONE.value()).setWeight(3))
+                        .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.ENCHANTED_BLESSED_WHETSTONE.value()).setWeight(1)));
+            }
         }
-        
-        if (BuiltInLootTables.VILLAGE_TOOLSMITH.equals(key) || BuiltInLootTables.VILLAGE_ARMORER.equals(key)
-                || BuiltInLootTables.VILLAGE_WEAPONSMITH.equals(key)) {
-            addPool.accept(new LootPool.Builder()
-                    .setRolls(UniformGenerator.between(0, 2))
-                    .add(EmptyLootItem.emptyItem().setWeight(16))
-                    .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.WHETSTONE.value()).setWeight(10))
-                    .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.BLESSED_WHETSTONE.value()).setWeight(1)));
-        } else if (BuiltInLootTables.SIMPLE_DUNGEON.equals(key) || BuiltInLootTables.ABANDONED_MINESHAFT.equals(key)
-                || BuiltInLootTables.STRONGHOLD_LIBRARY.equals(key) || BuiltInLootTables.UNDERWATER_RUIN_BIG.equals(key)
-                || BuiltInLootTables.WOODLAND_MANSION.equals(key)
-                || BuiltInLootTables.TRIAL_CHAMBERS_CORRIDOR.equals(key)) {
-            addPool.accept(new LootPool.Builder()
-                    .add(EmptyLootItem.emptyItem().setWeight(8))
-                    .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.WHETSTONE.value()).setWeight(5))
-                    .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.BLESSED_WHETSTONE.value()).setWeight(3))
-                    .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.ENCHANTED_BLESSED_WHETSTONE.value()).setWeight(1)));
+
+        if (CursesAndCryptics.config.crypticEnchantedBookLoot) {
+            if (BuiltInLootTables.STRONGHOLD_LIBRARY.equals(key)) {
+                addPool.accept(new LootPool.Builder()
+                        .add(EmptyLootItem.emptyItem().setWeight(1))
+                        .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK.value()).setWeight(2).apply(SetCrypticEnchantedBookLevelFunction.setLevel(UniformGenerator.between(30, 40)))));
+            } else if (BuiltInLootTables.STRONGHOLD_CORRIDOR.equals(key) || BuiltInLootTables.STRONGHOLD_CROSSING.equals(key) || BuiltInLootTables.JUNGLE_TEMPLE.equals(key)) {
+                addPool.accept(new LootPool.Builder()
+                        .add(EmptyLootItem.emptyItem().setWeight(20))
+                        .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK.value()).setWeight(1).apply(SetCrypticEnchantedBookLevelFunction.setLevel(UniformGenerator.between(30, 40)))));
+            } else if (BuiltInLootTables.SIMPLE_DUNGEON.equals(key) || BuiltInLootTables.ABANDONED_MINESHAFT.equals(key) || BuiltInLootTables.UNDERWATER_RUIN_SMALL.equals(key) || BuiltInLootTables.UNDERWATER_RUIN_BIG.equals(key)) {
+                addPool.accept(new LootPool.Builder()
+                        .add(EmptyLootItem.emptyItem().setWeight(10))
+                        .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK.value()).setWeight(1).apply(SetCrypticEnchantedBookLevelFunction.setLevel(UniformGenerator.between(8, 20)))));
+            } else if (BuiltInLootTables.ANCIENT_CITY.equals(key) || BuiltInLootTables.PILLAGER_OUTPOST.equals(key) || BuiltInLootTables.DESERT_PYRAMID.equals(key) || BuiltInLootTables.WOODLAND_MANSION.equals(key)) {
+                addPool.accept(new LootPool.Builder()
+                        .add(EmptyLootItem.emptyItem().setWeight(8))
+                        .add(LootItem.lootTableItem(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK.value()).setWeight(1).apply(SetCrypticEnchantedBookLevelFunction.setLevel(UniformGenerator.between(15, 32)))));
+            }
         }
     }
 

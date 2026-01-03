@@ -24,6 +24,7 @@ public final class CursesAndCrypticsNeoForge {
         CursesAndCrypticsRegistryImpl.DATA_COMPONENT_TYPES.register(modBus);
         CursesAndCrypticsRegistryImpl.SOUND_EVENTS.register(modBus);
         CursesAndCrypticsRegistryImpl.ITEMS.register(modBus);
+        CursesAndCrypticsRegistryImpl.LOOT_FUNCTIONS.register(modBus);
         
         modBus.addListener(CursesAndCrypticsNeoForge::onBuildCreativeModeTabContents);
         NeoForge.EVENT_BUS.addListener(CursesAndCrypticsNeoForge::onGrindstoneTake);

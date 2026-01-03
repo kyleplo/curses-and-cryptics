@@ -21,6 +21,8 @@ public class GrindstoneMenuOutputSlotMixin {
     private void getExperienceFromItem(ItemStack itemStack, CallbackInfoReturnable<Integer> ci) {
         if (itemStack.is(CursesAndCrypticsRegistry.WHETSTONES)) {
             ci.setReturnValue(Integer.MIN_VALUE);
+        } else if (itemStack.is(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK)) {
+            ci.setReturnValue(itemStack.getOrDefault(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_LEVEL.value(), 0) * 7);
         }
     }
 
@@ -36,7 +38,7 @@ public class GrindstoneMenuOutputSlotMixin {
             Inventory inv = player.getInventory();
             int slot = -1;
             for (int i = 0; i < inv.getContainerSize(); i++) {
-                if (inv.getItem(i).has(CursesAndCrypticsRegistry.POST_GRINDSTONE_PROCESSING.value())) {
+                if (inv.getItem(i).has(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value())) {
                     slot = i;
                     break;
                 }
@@ -47,7 +49,7 @@ public class GrindstoneMenuOutputSlotMixin {
             }
         }
 
-        takenItemStack.remove(CursesAndCrypticsRegistry.POST_GRINDSTONE_PROCESSING.value());
+        takenItemStack.remove(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value());
     }
 
     @WrapOperation(method = "onTake", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/Container;setItem(ILnet/minecraft/world/item/ItemStack;)V"))

@@ -17,6 +17,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -32,7 +33,7 @@ public abstract class ItemStackMixin {
     public void getBarWidth(CallbackInfoReturnable<Integer> ci) {
         ItemStack itemStack = ItemStack.class.cast(this);
 
-        if (!itemStack.isEnchanted()) return;
+        if (!itemStack.isEnchanted() || itemStack.has(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value())) return;
 
         ItemEnchantments itemEnchantments = itemStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
 
@@ -49,7 +50,7 @@ public abstract class ItemStackMixin {
     public void getBarColor(CallbackInfoReturnable<Integer> ci) {
         ItemStack itemStack = ItemStack.class.cast(this);
 
-        if (!itemStack.isEnchanted()) return;
+        if (!itemStack.isEnchanted() || itemStack.has(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value())) return;
 
         ItemEnchantments itemEnchantments = itemStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
 
@@ -66,7 +67,7 @@ public abstract class ItemStackMixin {
     public void isBarVisible(CallbackInfoReturnable<Boolean> ci) {
         ItemStack itemStack = ItemStack.class.cast(this);
 
-        if (!itemStack.isEnchanted()) return;
+        if (!itemStack.isEnchanted() || itemStack.has(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value())) return;
 
         ItemEnchantments itemEnchantments = itemStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
 
@@ -98,20 +99,22 @@ public abstract class ItemStackMixin {
             }
         }
 
-        ItemLore itemLore = itemStack.getOrDefault(DataComponents.LORE, ItemLore.EMPTY);
+        ItemLore originalItemLore = itemStack.getOrDefault(DataComponents.LORE, ItemLore.EMPTY);
+        ItemLore itemLore = originalItemLore;
 
-        if (itemStack.has(CursesAndCrypticsRegistry.POST_GRINDSTONE_PROCESSING.value())) {
+        if (itemStack.has(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value())) {
             tooltipDisplay = tooltipDisplay.withHidden(DataComponents.ATTRIBUTE_MODIFIERS, true).withHidden(DataComponents.ENCHANTMENTS, true).withHidden(DataComponents.STORED_ENCHANTMENTS, true);
-            itemStack.set(DataComponents.LORE, itemLore.withLineAdded(Component.translatable("container.grindstone.whetstone_take_item_hint").withStyle(ChatFormatting.RESET).withStyle(ChatFormatting.GRAY)));
+            itemLore = itemLore.withLineAdded(Component.translatable("container.take_item_hint").withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(false)));
         }
 
+        if (itemStack.has(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_LEVEL.value()) || itemStack.is(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK)) {
+            itemLore = itemLore.withLineAdded(Component.translatable("item.curses_and_cryptics.cryptic_enchanted_book.level_tooltip", itemStack.getOrDefault(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_LEVEL.value(), 1)).withStyle(Style.EMPTY.withColor(ChatFormatting.GRAY).withItalic(false)));
+        }
+
+        itemStack.set(DataComponents.LORE, itemLore);
         original.call(tooltipContext, tooltipDisplay, player, tooltipFlag, consumer);
 
-        if (itemLore.lines().size() > 0) {
-            itemStack.set(DataComponents.LORE, itemLore);
-        } else {
-            itemStack.remove(DataComponents.LORE);
-        }
+        itemStack.set(DataComponents.LORE, originalItemLore);
     }
 
     @WrapMethod(method = "isEnchantable")

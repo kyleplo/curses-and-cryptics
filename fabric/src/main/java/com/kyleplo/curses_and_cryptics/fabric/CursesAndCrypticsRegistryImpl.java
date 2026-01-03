@@ -6,6 +6,7 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 import com.kyleplo.curses_and_cryptics.CursesAndCryptics;
+import com.mojang.serialization.MapCodec;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -17,6 +18,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 
 public class CursesAndCrypticsRegistryImpl {
     public static final List<Item> itemsForCreativeTab = new ArrayList<>();
@@ -30,7 +33,7 @@ public class CursesAndCrypticsRegistryImpl {
     public static <T> Holder<DataComponentType<T>> registerDataComponentType(String name,
             UnaryOperator<DataComponentType.Builder<T>> builderOp) {
         DataComponentType<T> component = builderOp.apply(DataComponentType.builder()).build();
-        Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, name, component);
+        Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name), component);
         return Holder.direct(component);
     }
 
@@ -48,5 +51,9 @@ public class CursesAndCrypticsRegistryImpl {
         itemsForCreativeTab.add(item);
         return Registry.registerForHolder(BuiltInRegistries.ITEM,
                 ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name), item);
+    }
+
+    public static <T extends LootItemFunction> Holder<LootItemFunctionType<?>> registerLootFunction(String name, MapCodec<T> codec) {
+        return Registry.registerForHolder(BuiltInRegistries.LOOT_FUNCTION_TYPE, ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name), new LootItemFunctionType<T>(codec));
     }
 }

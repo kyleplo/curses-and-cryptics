@@ -1,0 +1,30 @@
+{
+    "enchantment.curses_and_cryptics.immutability_curse": "Curse of Immutability",
+    "enchantment.curses_and_cryptics.obscuring_curse": "Curse of Obscuring",
+    "enchantment.curses_and_cryptics.obscuring_hidden": "...",
+    "enchantment.curses_and_cryptics.quixotism_curse": "Curse of Quixotism",
+    "enchantment.curses_and_cryptics.instability_curse": "Curse of Instability",
+    "enchantment.curses_and_cryptics.miasma_curse": "Curse of Miasma",
+
+    "enchantment.curses_and_cryptics.immutability_curse.desc": "Prevents additional enchantments from being added to this item",
+    "enchantment.curses_and_cryptics.obscuring_curse.desc": "Hides this item's enchantment and attribute lists",
+    "enchantment.curses_and_cryptics.quixotism_curse.desc": "Hides this item's durability",
+    "enchantment.curses_and_cryptics.instability_curse.desc": "Makes this item have a chance of breaking when enchantments are added to it",
+    "enchantment.curses_and_cryptics.miasma_curse.desc": "Increase the radius at which mobs can sense you",
+
+    "attribute.name.detectable_range": "Detectable Range",
+
+    "subtitles.block.anvil.apply_curse": "Anvil applies curse",
+
+    "item.curses_and_cryptics.cryptic_enchanted_book": "Cryptic Enchanted Book",
+    "item.curses_and_cryptics.cryptic_enchanted_book.level_tooltip": "Enchantment Level: %s",
+
+    "item.curses_and_cryptics.whetstone": "Whetstone",
+    "item.curses_and_cryptics.blessed_whetstone": "Blessed Whetstone",
+    "item.curses_and_cryptics.enchanted_blessed_whetstone": "Enchanted Blessed Whetstone",
+
+    "container.take_item_hint": "Take item to apply changes",
+
+    "tag.item.curses_and_cryptics.anvil_repair": "Anvil Repair Ingredients",
+    "tag.item.curses_and_cryptics.whetstones": "Whetstones"
+}

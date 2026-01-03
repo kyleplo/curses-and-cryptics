@@ -1,6 +1,7 @@
 package com.kyleplo.curses_and_cryptics.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -18,10 +19,13 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.EnchantmentTags;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AnvilMenu;
+import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
@@ -34,6 +38,14 @@ import java.util.stream.Stream;
 
 @Mixin(AnvilMenu.class)
 public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
+    @Shadow
+    private final DataSlot cost;
+
+    private AnvilMenuMixin () {
+        cost = null;
+        throw new AssertionError("this shouldn't happen");
+    }
+
     @WrapMethod(method = "createResult")
     private void createResult(Operation<Void> original) {
         AnvilMenu anvilMenu = AnvilMenu.class.cast(this);
@@ -41,7 +53,8 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
         ItemStack stack2 = anvilMenu.slots.get(1).getItem();
 
         if (!stack2.isEmpty()) {
-            ItemEnchantments itemEnchantments = stack1.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
+            ItemEnchantments itemEnchantments = stack1.getOrDefault(DataComponents.ENCHANTMENTS,
+                    ItemEnchantments.EMPTY);
             for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemEnchantments.entrySet()) {
                 Holder<Enchantment> holder = entry.getKey();
                 if (holder.is(CursesAndCrypticsRegistry.IMMUTABILITY_CURSE)) {
@@ -53,14 +66,53 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
 
         original.call();
 
-        this.access.execute((level, blockPos) -> {
-                if (level.isClientSide()) {
-                    return;
+        if (CursesAndCryptics.config.crypticEnchantedBookCombining && stack1.is(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK)
+                && stack2.is(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK)) {
+            int stack1Level = stack1.getOrDefault(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_LEVEL.value(), 1);
+            int stack2Level = stack2.getOrDefault(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_LEVEL.value(), 1);
+            int levelSum = stack1Level + stack2Level;
+            ItemStack resultingBook = new ItemStack(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK);
+            resultingBook.set(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_LEVEL.value(), levelSum);
+            anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(resultingBook);
+            int potentialCost = levelSum - (Math.max(stack1Level, stack2Level) / 2);
+            cost.set(Math.max(1, levelSum > 40 ? Math.max(potentialCost, 41) : potentialCost));
+        }
+
+        if (stack1.has(DataComponents.ENCHANTABLE) && ((!stack1.is(Items.BOOK) && !stack1.has(DataComponents.STORED_ENCHANTMENTS)) || CursesAndCryptics.config.crypticEnchantedBookWorksOnBooks) && stack2.is(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK)) {
+            ItemStack result = stack1.copy();
+            if (CursesAndCryptics.config.crypticEnchantedBookHideResult) {
+                result.set(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value(), Unit.INSTANCE);
+            }
+
+            this.access.execute((level, blockPos) -> {
+                for (int enchantLevel = stack2.getOrDefault(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_LEVEL.value(), 1); enchantLevel > 0; enchantLevel -= 0) {
+                    Stream<Holder<Enchantment>> enchants = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT)
+                        .get(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_ENCHANTMENT).map(HolderSet.Named::stream).orElse(Stream.empty());
+                    List<EnchantmentInstance> possibleEnchants = EnchantmentHelper.selectEnchantment(level.random,
+                            stack1, enchantLevel, enchants);
+                    if (possibleEnchants.size() > 0 && EnchantmentHelper.isEnchantmentCompatible(result.getEnchantments().keySet(), possibleEnchants.getFirst().enchantment())) {
+                        result.enchant(possibleEnchants.getFirst().enchantment(),
+                                    possibleEnchants.getFirst().level());
+                        enchantLevel -= Math.max(possibleEnchants.getFirst().enchantment().value().getAnvilCost(), 2);
+                    } else {
+                        enchantLevel -= 5;
+                    }
                 }
-                BlockState blockState = level.getBlockState(blockPos);
-                ItemStack resultItemStack = anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).getItem();
-                resultItemStack.set(CursesAndCrypticsRegistry.POST_ANVIL_PROCESSING.value(), blockState.is(Blocks.DAMAGED_ANVIL) ? 2
-                        : (blockState.is(Blocks.CHIPPED_ANVIL) ? 1 : 0));
+                result.set(DataComponents.REPAIR_COST, AnvilMenu.calculateIncreasedRepairCost(stack1.getOrDefault(DataComponents.REPAIR_COST, 0)));
+                anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(result);
+                cost.set(stack1.getOrDefault(DataComponents.REPAIR_COST, 0) + stack2.getOrDefault(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_LEVEL.value(), 1));
+            });
+        }
+
+        this.access.execute((level, blockPos) -> {
+            if (level.isClientSide()) {
+                return;
+            }
+            BlockState blockState = level.getBlockState(blockPos);
+            ItemStack resultItemStack = anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).getItem();
+            resultItemStack.set(CursesAndCrypticsRegistry.POST_ANVIL_PROCESSING.value(),
+                    blockState.is(Blocks.DAMAGED_ANVIL) ? 2
+                            : (blockState.is(Blocks.CHIPPED_ANVIL) ? 1 : 0));
         });
     }
 
@@ -91,7 +143,8 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
             }
         }
 
-        ItemEnchantments itemEnchantments = takenItemStack.getOrDefault(DataComponents.ENCHANTMENTS, ItemEnchantments.EMPTY);
+        ItemEnchantments itemEnchantments = takenItemStack.getOrDefault(DataComponents.ENCHANTMENTS,
+                ItemEnchantments.EMPTY);
 
         boolean hasInstability = false;
         int enchants = 0;
@@ -110,7 +163,8 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
             takenItemStack.setCount(0);
             anvilMenu.slots.get(AnvilMenu.INPUT_SLOT).set(ItemStack.EMPTY);
             anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(ItemStack.EMPTY);
-            player.level().playSound(null, player.blockPosition(), SoundEvents.ITEM_BREAK.value(), SoundSource.PLAYERS, 0.8f, 1f);
+            player.level().playSound(null, player.blockPosition(), SoundEvents.ITEM_BREAK.value(), SoundSource.PLAYERS,
+                    0.8f, 1f);
             ci.cancel();
             return;
         }
@@ -120,22 +174,26 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
             this.access.execute((level, blockPos) -> {
                 int enchantsNeededForCurse = 2 - anvilDamage;
                 double curseMultiplier = anvilDamage == 2 ? CursesAndCryptics.config.damagedAnvilCurseChance
-                        : (anvilDamage == 1 ? CursesAndCryptics.config.chippedAnvilCurseChance : CursesAndCryptics.config.defaultAnvilCurseChance);
+                        : (anvilDamage == 1 ? CursesAndCryptics.config.chippedAnvilCurseChance
+                                : CursesAndCryptics.config.defaultAnvilCurseChance);
                 if (itemEnchantments.size() > enchantsNeededForCurse
-                        && player.getRandom().nextFloat() < (itemEnchantments.size() - enchantsNeededForCurse) * curseMultiplier) {
+                        && player.getRandom().nextFloat() < (itemEnchantments.size() - enchantsNeededForCurse)
+                                * curseMultiplier) {
                     Stream<Holder<Enchantment>> curses = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT)
                             .get(EnchantmentTags.CURSE).map(HolderSet.Named::stream).orElse(Stream.empty());
                     List<EnchantmentInstance> possibleCurses = EnchantmentHelper.selectEnchantment(player.getRandom(),
                             takenItemStack, 40, curses);
-                    if (possibleCurses.size() > 0) {
-                        takenItemStack.enchant(possibleCurses.getFirst().enchantment(), possibleCurses.getFirst().level());
+                    if (possibleCurses.size() > 0 && EnchantmentHelper.isEnchantmentCompatible(takenItemStack.getEnchantments().keySet(), possibleCurses.getFirst().enchantment())) {
+                        takenItemStack.enchant(possibleCurses.getFirst().enchantment(),
+                                possibleCurses.getFirst().level());
                         level.playSound(null, blockPos.getX(), blockPos.getY(), blockPos.getZ(),
-                                 CursesAndCrypticsRegistry.ANVIL_APPLY_CURSE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                                CursesAndCrypticsRegistry.ANVIL_APPLY_CURSE, SoundSource.BLOCKS, 1.0F, 1.0F);
                     }
                 }
             });
         }
 
         takenItemStack.remove(CursesAndCrypticsRegistry.POST_ANVIL_PROCESSING.value());
+        takenItemStack.remove(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value());
     }
 }

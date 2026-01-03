@@ -3,7 +3,7 @@ package com.kyleplo.curses_and_cryptics;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
-import com.mojang.serialization.codecs.PrimitiveCodec;
+import com.mojang.serialization.MapCodec;
 
 import dev.architectury.injectables.annotations.ExpectPlatform;
 import net.minecraft.core.Holder;
@@ -15,12 +15,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.Attribute.Sentiment;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunction;
+import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 
 public class CursesAndCrypticsRegistry {
     public static final ResourceKey<Enchantment> IMMUTABILITY_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
@@ -39,9 +42,16 @@ public class CursesAndCrypticsRegistry {
                         .setSentiment(Sentiment.NEGATIVE));;
 
     public static Holder<DataComponentType<Integer>> POST_ANVIL_PROCESSING;
-    public static Holder<DataComponentType<Boolean>> POST_GRINDSTONE_PROCESSING;
+    public static Holder<DataComponentType<Unit>> RESULTS_HIDDEN;
+    public static Holder<DataComponentType<Integer>> CRYPTIC_ENCHANTED_BOOK_LEVEL;
 
     public static Holder<SoundEvent> ANVIL_APPLY_CURSE;
+
+    public static Holder<LootItemFunctionType<?>> CRYPTIC_ENCHANTED_BOOK_SET_LEVEL = registerLootFunction("cryptic_enchanted_book_set_level", SetCrypticEnchantedBookLevelFunction.CODEC);
+
+    public static Holder<Item> CRYPTIC_ENCHANTED_BOOK = registerItem("cryptic_enchanted_book", CrypticEnchantedBookItem::new, new Item.Properties());
+
+    public static TagKey<Enchantment> CRYPTIC_ENCHANTED_BOOK_ENCHANTMENT = TagKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "cryptic_enchanted_book_enchantments"));
 
     public static Holder<Item> WHETSTONE = registerItem("whetstone", Item::new, new Item.Properties());
     public static Holder<Item> BLESSED_WHETSTONE = registerItem("blessed_whetstone", Item::new, new Item.Properties());
@@ -54,8 +64,11 @@ public class CursesAndCrypticsRegistry {
         POST_ANVIL_PROCESSING = registerDataComponentType("post_anvil_processing", (builder -> {
             return builder.persistent(ExtraCodecs.intRange(0, 2));
         }));
-        POST_GRINDSTONE_PROCESSING = registerDataComponentType("post_grindstone_processing", (builder -> {
-            return builder.persistent(PrimitiveCodec.BOOL);
+        RESULTS_HIDDEN = registerDataComponentType("results_hidden", (builder -> {
+            return builder.persistent(Unit.CODEC);
+        }));
+        CRYPTIC_ENCHANTED_BOOK_LEVEL = registerDataComponentType("cryptic_enchanted_book_level", (builder -> {
+            return builder.persistent(ExtraCodecs.intRange(1, 256));
         }));
 
         ANVIL_APPLY_CURSE = registerSoundEvent("block.anvil.apply_curse");
@@ -79,6 +92,11 @@ public class CursesAndCrypticsRegistry {
 
     @ExpectPlatform
     public static Holder<Item> registerItem(String name, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
+        throw new AssertionError();
+    }
+
+    @ExpectPlatform
+    public static <T extends LootItemFunction> Holder<LootItemFunctionType<?>> registerLootFunction(String name, MapCodec<T> codec) {
         throw new AssertionError();
     }
 }

@@ -23,6 +23,13 @@ public class CursesAndCrypticsConfig {
 
     public boolean whetstoneLoot = true;
     public boolean whetstoneTrade = false;
+    public boolean whetstoneHideResult = true;
+
+    public boolean crypticEnchantedBookLoot = true;
+    public boolean crypticEnchantedBookWorksOnBooks = false;
+    public boolean crypticEnchantedBookHideResult = true;
+    public boolean crypticEnchantedBookCombining = true;
+    public boolean crypticEnchantedBookGrindstoning = true;
 
     public static CursesAndCrypticsConfig init() {
         CursesAndCrypticsConfig config = null;

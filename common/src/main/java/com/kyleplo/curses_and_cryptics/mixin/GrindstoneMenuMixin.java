@@ -3,6 +3,7 @@ package com.kyleplo.curses_and_cryptics.mixin;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
+import com.kyleplo.curses_and_cryptics.CursesAndCryptics;
 import com.kyleplo.curses_and_cryptics.CursesAndCrypticsRegistry;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
@@ -12,6 +13,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.Unit;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.GrindstoneMenu;
@@ -31,7 +33,9 @@ public class GrindstoneMenuMixin {
     private ItemStack computeResult(ItemStack input1, ItemStack input2, Operation<ItemStack> original) {
         ItemStack originalValue = original.call(input1, input2);
 
-        if (originalValue.isEmpty() && !input1.isEmpty() && !input2.isEmpty()
+        if (CursesAndCryptics.config.crypticEnchantedBookGrindstoning && originalValue.isEmpty() && (input1.isEmpty() || input2.isEmpty()) && (input1.is(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK) || input2.is(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK))) {
+            return new ItemStack(Items.BOOK);
+        } else if (originalValue.isEmpty() && !input1.isEmpty() && !input2.isEmpty()
                 && (input1.is(CursesAndCrypticsRegistry.WHETSTONES) || input2.is(CursesAndCrypticsRegistry.WHETSTONES))) {
             if (input1.is(CursesAndCrypticsRegistry.WHETSTONES) && input2.is(CursesAndCrypticsRegistry.WHETSTONES)) {
                 return originalValue;
@@ -84,7 +88,9 @@ public class GrindstoneMenuMixin {
                     resultItem = resultItem.transmuteCopy(Items.BOOK);
                 }
             }
-            resultItem.set(CursesAndCrypticsRegistry.POST_GRINDSTONE_PROCESSING.value(), whetstone.is(CursesAndCrypticsRegistry.BLESSED_WHETSTONE));
+            if (CursesAndCryptics.config.whetstoneHideResult) {
+                resultItem.set(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value(), Unit.INSTANCE);
+            }
             return resultItem;
         }
         return originalValue;
