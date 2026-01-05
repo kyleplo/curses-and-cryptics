@@ -1,17 +1,19 @@
 modLoader = "javafml"
 loaderVersion = "[4,)"
-#issueTrackerURL = ""
-license = "Insert License Here"
+issueTrackerURL = "https://github.com/kyleplo/curses-and-cryptics/issues"
+license = "LGPL-3.0"
 
 [[mods]]
 modId = "curses_and_cryptics"
 version = "${version}"
 displayName = "Curses and Cryptics"
-authors = "Me!"
+displayURL = "https://modrinth.com/mod/curses-and-cryptics"
+authors = "kyleplo"
 description = '''
-This is an example description! Tell everyone what your mod is about!
+Expansion upon Minecraft's curses and enchantment mechanics.
 '''
-#logoFile = ""
+logoFile = "assets/curses_and_cryptics/icon.png"
+logoBlur = false
 
 [[dependencies.curses_and_cryptics]]
 modId = "neoforge"

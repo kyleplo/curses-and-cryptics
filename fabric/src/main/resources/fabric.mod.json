@@ -3,15 +3,15 @@
   "id": "curses_and_cryptics",
   "version": "${version}",
   "name": "Curses and Cryptics",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "description": "Expansion upon Minecraft's curses and enchantment mechanics.",
   "authors": [
-    "Me!"
+    "kyleplo"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://modrinth.com/mod/curses-and-cryptics",
+    "sources": "https://github.com/kyleplo/curses-and-cryptics"
   },
-  "license": "CC0-1.0",
+  "license": "LGPL-3.0",
   "icon": "assets/curses_and_cryptics/icon.png",
   "environment": "*",
   "entrypoints": {
@@ -22,7 +22,7 @@
       "com.kyleplo.curses_and_cryptics.fabric.client.CursesAndCrypticsFabricClient"
     ],
     "jei_mod_plugin": [
-      "com.kyleplo.curses_and_cryptics.common.CursesAndCrypticsJeiPlugin"
+      "com.kyleplo.curses_and_cryptics.CursesAndCrypticsJeiPlugin"
     ]
   },
   "mixins": [
@@ -33,8 +33,5 @@
     "minecraft": "~1.21.5",
     "java": ">=21",
     "fabric-api": "*"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }
