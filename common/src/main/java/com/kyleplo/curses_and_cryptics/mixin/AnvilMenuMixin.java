@@ -87,13 +87,13 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
         if (stack1.has(DataComponents.REPAIR_COST) && !hasMisappropriationCurse && stack2.is(CursesAndCrypticsRegistry.MISAPPROPRIATION_SIGIL)) {
             ItemStack result = stack1.copy();
             result.remove(DataComponents.REPAIR_COST);
-
+            cost.set(Math.max(stack1.getOrDefault(DataComponents.REPAIR_COST, 0), 1));
+            
             this.access.execute((level, blockPos) -> {
                 if (CursesAndCryptics.config.misappropriationCurse) {
                     result.enchant(level.registryAccess().getOrThrow(CursesAndCrypticsRegistry.MISAPPROPRIATION_CURSE), 1);
                 }
                 anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(result);
-                cost.set(Math.max(stack1.getOrDefault(DataComponents.REPAIR_COST, 0), 1));
             });
         }
 
@@ -102,6 +102,8 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
             if (CursesAndCryptics.config.crypticEnchantedBookHideResult) {
                 result.set(CursesAndCrypticsRegistry.RESULTS_HIDDEN.value(), Unit.INSTANCE);
             }
+
+            cost.set(stack1.getOrDefault(DataComponents.REPAIR_COST, 0) + stack2.getOrDefault(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_LEVEL.value(), 1));
 
             this.access.execute((level, blockPos) -> {
                 boolean enchantsApplied = false;
@@ -123,7 +125,8 @@ public abstract class AnvilMenuMixin extends ItemCombinerMenuMixin {
                 if (enchantsApplied) {
                     result.set(DataComponents.REPAIR_COST, AnvilMenu.calculateIncreasedRepairCost(stack1.getOrDefault(DataComponents.REPAIR_COST, 0)));
                     anvilMenu.slots.get(AnvilMenu.RESULT_SLOT).set(result);
-                    cost.set(stack1.getOrDefault(DataComponents.REPAIR_COST, 0) + stack2.getOrDefault(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_LEVEL.value(), 1));
+                } else {
+                    this.cost.set(0);
                 }
             });
         }

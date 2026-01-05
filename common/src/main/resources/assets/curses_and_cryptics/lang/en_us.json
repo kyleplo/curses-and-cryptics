@@ -49,5 +49,20 @@
     "advancements.curses_and_cryptics.immutability.title": "Can't Touch This",
     "advancements.curses_and_cryptics.immutability.description": "Obtain an item with Curse of Immutability.",
     "advancements.curses_and_cryptics.cryptic_enchanted_book.title": "Crafting the Cryptic",
-    "advancements.curses_and_cryptics.cryptic_enchanted_book.description": "Obtain a Cryptic Enchanted Book."
+    "advancements.curses_and_cryptics.cryptic_enchanted_book.description": "Obtain a Cryptic Enchanted Book.",
+
+    "jei.hint.curses_and_cryptics.cryptic_enchanted_book": "Random enchantments applied",
+    "jei.hint.curses_and_cryptics.misappropriation_sigil_input": "With a prior work cost",
+    "jei.hint.curses_and_cryptics.misappropriation_sigil_output": "With its prior work cost reset",
+    "jei.hint.curses_and_cryptics.enchanted_blessed_whetstone": "All curses removed",
+    "jei.hint.curses_and_cryptics.blessed_whetstone": "Random enchantment or curse removed",
+    "jei.hint.curses_and_cryptics.whetstone": "Random enchantment removed",
+    "jei.hint.curses_and_cryptics.any_enchanted_item": "Any Enchanted Item",
+    "jei.hint.curses_and_cryptics.any_cursed_item": "Any Cursed Item",
+
+    "jei.info.curses_and_cryptics.cryptic_enchanted_book": "Can be combined with an enchantable item in an anvil to enchant it randomly at that level, including treasure enchantments and curses.",
+    "jei.info.curses_and_cryptics.misappropriation_sigil": "Can be combined with an item in an anvil to reset its prior work cost.",
+    "jei.info.curses_and_cryptics.enchanted_blessed_whetstone": "Can be combined with a cursed item in a grindstone to remove all curses from it.",
+    "jei.info.curses_and_cryptics.blessed_whetstone": "Can be combined with an enchanted item in a grindstone to remove a random enchantment from it. Can remove curses.",
+    "jei.info.curses_and_cryptics.whetstone": "Can be combined with an enchanted item in a grindstone to remove a random enchantment from it. Cannot remove curses."
 }

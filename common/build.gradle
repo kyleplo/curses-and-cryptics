@@ -7,4 +7,9 @@ dependencies {
     // which get remapped to the correct annotations on each platform.
     // Do NOT use other classes from Fabric Loader.
     modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+
+    // compile against the JEI API but do not include it at runtime
+    modCompileOnly("mezz.jei:jei-${rootProject.minecraft_version}-common-api:${rootProject.jei_version}")
+    // at runtime, use the full JEI jar
+    modRuntimeOnly("mezz.jei:jei-${rootProject.minecraft_version}-common:${rootProject.jei_version}")
 }

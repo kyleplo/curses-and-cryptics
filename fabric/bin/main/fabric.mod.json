@@ -20,6 +20,9 @@
     ],
     "client": [
       "com.kyleplo.curses_and_cryptics.fabric.client.CursesAndCrypticsFabricClient"
+    ],
+    "jei_mod_plugin": [
+      "com.kyleplo.curses_and_cryptics.common.CursesAndCrypticsJeiPlugin"
     ]
   },
   "mixins": [
