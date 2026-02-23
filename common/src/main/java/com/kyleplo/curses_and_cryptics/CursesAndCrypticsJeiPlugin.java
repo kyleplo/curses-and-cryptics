@@ -3,6 +3,8 @@ package com.kyleplo.curses_and_cryptics;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jspecify.annotations.NonNull;
+
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
@@ -14,7 +16,7 @@ import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.EnchantmentTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -30,11 +32,11 @@ public class CursesAndCrypticsJeiPlugin implements IModPlugin {
     }
 
     @Override
-    public ResourceLocation getPluginUid() {
-        return ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, CursesAndCryptics.MOD_ID);
+    public @NonNull Identifier getPluginUid() {
+        return Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, CursesAndCryptics.MOD_ID);
     }
     
-    public void registerRecipes(IRecipeRegistration registration) {
+    public void registerRecipes(@NonNull IRecipeRegistration registration) {
         ArrayList<IJeiAnvilRecipe> anvilRecipes = new ArrayList<>();
         ArrayList<IJeiGrindstoneRecipe> grindstoneRecipes = new ArrayList<>();
 
@@ -52,7 +54,7 @@ public class CursesAndCrypticsJeiPlugin implements IModPlugin {
                 List.of(new ItemStack(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK)), 
                 List.of(ItemStack.EMPTY),
                 List.of(new ItemStack(Items.BOOK)), 7, 7, 
-                null
+                Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "cryptic_enchanted_book")
             ));
         }
 
@@ -106,7 +108,7 @@ public class CursesAndCrypticsJeiPlugin implements IModPlugin {
                         List.of(result),
                          0,
                          0,
-                         null));
+                         Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "enchanted_blessed_whetstone_" + itemStack.hashCode())));
                 } else {
                     ItemStack input = itemStack.copy();
                     input.set(DataComponents.ITEM_NAME, Component.translatable("jei.hint.curses_and_cryptics.any_enchanted_item"));
@@ -123,7 +125,7 @@ public class CursesAndCrypticsJeiPlugin implements IModPlugin {
                         List.of(result),
                          0,
                          0,
-                         null));
+                         Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "whetstone_" + itemStack.hashCode())));
                 }
 
                 ItemStack input = itemStack.copy();
@@ -141,7 +143,7 @@ public class CursesAndCrypticsJeiPlugin implements IModPlugin {
                     List.of(result),
                         0,
                         0,
-                        null));
+                        Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "blessed_whetstone_" + itemStack.hashCode())));
             }
         }
 

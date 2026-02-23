@@ -11,7 +11,7 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
@@ -40,12 +40,12 @@ public class CursesAndCrypticsRegistryImpl {
 
     public static Holder<SoundEvent> registerSoundEvent(String name) {
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(
-                                ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID,
+                                Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID,
                                         name)));
     }
 
     public static Holder<Item> registerItem(String name, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
-        DeferredItem<Item> deferredItem = ITEMS.registerItem(name, itemFactory, settings);
+        DeferredItem<Item> deferredItem = ITEMS.registerItem(name, itemFactory, () -> settings);
         itemsForCreativeTab.add(deferredItem);
         return deferredItem;
     }

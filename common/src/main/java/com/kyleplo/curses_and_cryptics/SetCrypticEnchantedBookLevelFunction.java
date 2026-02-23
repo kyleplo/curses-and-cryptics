@@ -3,6 +3,8 @@ package com.kyleplo.curses_and_cryptics;
 import java.util.List;
 import java.util.Set;
 
+import org.jspecify.annotations.NonNull;
+
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
@@ -28,15 +30,15 @@ public class SetCrypticEnchantedBookLevelFunction extends LootItemConditionalFun
       this.level = numberProvider;
    }
 
-   public LootItemFunctionType<SetCrypticEnchantedBookLevelFunction> getType() {
+   public @NonNull LootItemFunctionType<SetCrypticEnchantedBookLevelFunction> getType() {
       return (LootItemFunctionType<SetCrypticEnchantedBookLevelFunction>) CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_SET_LEVEL.value();
    }
 
-   public Set<ContextKey<?>> getReferencedContextParams() {
+   public @NonNull Set<ContextKey<?>> getReferencedContextParams() {
       return this.level.getReferencedContextParams();
    }
 
-   public ItemStack run(ItemStack itemStack, LootContext lootContext) {
+   public @NonNull ItemStack run(@NonNull ItemStack itemStack, @NonNull LootContext lootContext) {
       itemStack.set(CursesAndCrypticsRegistry.CRYPTIC_ENCHANTED_BOOK_LEVEL.value(), this.level.getInt(lootContext));
       return itemStack;
    }

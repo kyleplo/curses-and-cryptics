@@ -10,7 +10,7 @@ import com.kyleplo.curses_and_cryptics.CursesAndCryptics;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
@@ -25,7 +25,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 @Mixin(AnvilBlock.class)
 public class AnvilBlockMixin {
-    TagKey<Item> ANVIL_REPAIR = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "anvil_repair"));
+    TagKey<Item> ANVIL_REPAIR = TagKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "anvil_repair"));
 
     @Inject(method = "useWithoutItem", at = @At(value = "HEAD"), cancellable = true)
     protected void useWithoutItem(BlockState blockState, Level level, BlockPos blockPos, Player player, BlockHitResult blockHitResult, CallbackInfoReturnable<InteractionResult> ci) {

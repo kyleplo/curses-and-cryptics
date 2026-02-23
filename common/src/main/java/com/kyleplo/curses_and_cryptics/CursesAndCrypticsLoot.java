@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.function.Consumer;
 
+import org.jspecify.annotations.NonNull;
+
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.npc.VillagerProfession;
-import net.minecraft.world.entity.npc.VillagerTrades;
-import net.minecraft.world.entity.npc.VillagerTrades.ItemListing;
+import net.minecraft.world.entity.npc.villager.VillagerProfession;
+import net.minecraft.world.entity.npc.villager.VillagerTrades;
+import net.minecraft.world.entity.npc.villager.VillagerTrades.ItemListing;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.ItemCost;
@@ -89,7 +92,7 @@ public class CursesAndCrypticsLoot {
         Collections.addAll(newSecondTrades, trades.get(2));
         newSecondTrades.add(new ItemListing () {
             @Override
-            public MerchantOffer getOffer(Entity entity, RandomSource randomSource) {
+            public MerchantOffer getOffer(@NonNull ServerLevel level, @NonNull Entity entity, @NonNull RandomSource randomSource) {
                 return new MerchantOffer(new ItemCost(Items.EMERALD, 8), new ItemStack(CursesAndCrypticsRegistry.WHETSTONE, 1), 3, 5, 0.2f);
             }
         });

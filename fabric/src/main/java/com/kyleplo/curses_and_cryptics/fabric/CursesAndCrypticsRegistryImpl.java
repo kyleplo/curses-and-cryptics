@@ -14,7 +14,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.item.Item;
@@ -26,34 +26,34 @@ public class CursesAndCrypticsRegistryImpl {
 
     public static Holder<Attribute> registerAttribute(String name, Attribute attribute) {
         return Registry.registerForHolder(BuiltInRegistries.ATTRIBUTE,
-                ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name),
+                Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name),
                 attribute);
     }
 
     public static <T> Holder<DataComponentType<T>> registerDataComponentType(String name,
             UnaryOperator<DataComponentType.Builder<T>> builderOp) {
         DataComponentType<T> component = builderOp.apply(DataComponentType.builder()).build();
-        Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name), component);
+        Registry.register(BuiltInRegistries.DATA_COMPONENT_TYPE, Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name), component);
         return Holder.direct(component);
     }
 
     public static Holder<SoundEvent> registerSoundEvent(String name) {
         return Holder.direct(
                 Registry.register(BuiltInRegistries.SOUND_EVENT,
-                        ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name),
+                        Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name),
                         SoundEvent.createVariableRangeEvent(
-                                ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID,
+                                Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID,
                                         name))));
     }
 
     public static Holder<Item> registerItem(String name, Function<Item.Properties, Item> itemFactory, Item.Properties settings) {
-        Item item = itemFactory.apply(settings.setId(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name))));
+        Item item = itemFactory.apply(settings.setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name))));
         itemsForCreativeTab.add(item);
         return Registry.registerForHolder(BuiltInRegistries.ITEM,
-                ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name), item);
+                Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name), item);
     }
 
     public static <T extends LootItemFunction> Holder<LootItemFunctionType<?>> registerLootFunction(String name, MapCodec<T> codec) {
-        return Registry.registerForHolder(BuiltInRegistries.LOOT_FUNCTION_TYPE, ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name), new LootItemFunctionType<T>(codec));
+        return Registry.registerForHolder(BuiltInRegistries.LOOT_FUNCTION_TYPE, Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, name), new LootItemFunctionType<T>(codec));
     }
 }

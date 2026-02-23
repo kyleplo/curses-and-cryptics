@@ -11,7 +11,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.ExtraCodecs;
@@ -27,17 +27,17 @@ import net.minecraft.world.level.storage.loot.functions.LootItemFunctionType;
 
 public class CursesAndCrypticsRegistry {
     public static final ResourceKey<Enchantment> IMMUTABILITY_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
-            ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "immutability_curse"));
+            Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "immutability_curse"));
     public static final ResourceKey<Enchantment> OBSCURING_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
-            ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "obscuring_curse"));
+            Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "obscuring_curse"));
     public static final ResourceKey<Enchantment> QUIXOTISM_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
-            ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "quixotism_curse"));
+            Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "quixotism_curse"));
     public static final ResourceKey<Enchantment> INSTABILITY_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
-            ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "instability_curse"));
+            Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "instability_curse"));
     public static final ResourceKey<Enchantment> MIASMA_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
-            ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "miasma_curse"));
+            Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "miasma_curse"));
     public static final ResourceKey<Enchantment> MISAPPROPRIATION_CURSE = ResourceKey.create(Registries.ENCHANTMENT,
-            ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "misappropriation_curse"));
+            Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "misappropriation_curse"));
 
     public static final Holder<Attribute> DETECTABLE_RANGE = registerAttribute("detectable_range",
                 (new RangedAttribute("attribute.name.detectable_range", 0.0, -16.0, 16.0)).setSyncable(true)
@@ -53,14 +53,14 @@ public class CursesAndCrypticsRegistry {
 
     public static Holder<Item> CRYPTIC_ENCHANTED_BOOK = registerItem("cryptic_enchanted_book", CrypticEnchantedBookItem::new, new Item.Properties());
 
-    public static TagKey<Enchantment> CRYPTIC_ENCHANTED_BOOK_ENCHANTMENT = TagKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "cryptic_enchanted_book_enchantments"));
+    public static TagKey<Enchantment> CRYPTIC_ENCHANTED_BOOK_ENCHANTMENT = TagKey.create(Registries.ENCHANTMENT, Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "cryptic_enchanted_book_enchantments"));
 
     public static Holder<Item> WHETSTONE = registerItem("whetstone", Item::new, new Item.Properties());
     public static Holder<Item> BLESSED_WHETSTONE = registerItem("blessed_whetstone", Item::new, new Item.Properties());
     public static Holder<Item> ENCHANTED_BLESSED_WHETSTONE = registerItem("enchanted_blessed_whetstone", Item::new, new Item.Properties().rarity(Rarity.RARE).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true));
 
     public static TagKey<Item> WHETSTONES = TagKey.create(Registries.ITEM,
-            ResourceLocation.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "whetstones"));
+            Identifier.fromNamespaceAndPath(CursesAndCryptics.MOD_ID, "whetstones"));
 
     public static Holder<Item> MISAPPROPRIATION_SIGIL = registerItem("misappropriation_sigil", Item::new, new Item.Properties().rarity(Rarity.RARE).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true).stacksTo(1));
 
