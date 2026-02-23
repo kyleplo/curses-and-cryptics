@@ -18,14 +18,14 @@ logoBlur = false
 [[dependencies.curses_and_cryptics]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.5,)"
+versionRange = "[21.11,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.curses_and_cryptics]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.5,)"
+versionRange = "[1.21.11,)"
 ordering = "NONE"
 side = "BOTH"
 
