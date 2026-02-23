@@ -49,7 +49,7 @@ public class CursesAndCrypticsRegistry {
 
     public static Holder<SoundEvent> ANVIL_APPLY_CURSE;
 
-    public static Holder<LootItemFunctionType<?>> CRYPTIC_ENCHANTED_BOOK_SET_LEVEL = registerLootFunction("cryptic_enchanted_book_set_level", SetCrypticEnchantedBookLevelFunction.CODEC);
+    public static Holder<LootItemFunctionType<SetCrypticEnchantedBookLevelFunction>> CRYPTIC_ENCHANTED_BOOK_SET_LEVEL = registerLootFunction("cryptic_enchanted_book_set_level", SetCrypticEnchantedBookLevelFunction.CODEC);
 
     public static Holder<Item> CRYPTIC_ENCHANTED_BOOK = registerItem("cryptic_enchanted_book", CrypticEnchantedBookItem::new, new Item.Properties());
 
@@ -100,7 +100,7 @@ public class CursesAndCrypticsRegistry {
     }
 
     @ExpectPlatform
-    public static <T extends LootItemFunction> Holder<LootItemFunctionType<?>> registerLootFunction(String name, MapCodec<T> codec) {
+    public static <T extends LootItemFunction> Holder<LootItemFunctionType<T>> registerLootFunction(String name, MapCodec<T> codec) {
         throw new AssertionError();
     }
 }
